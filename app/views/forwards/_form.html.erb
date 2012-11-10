@@ -1,0 +1,29 @@
+<%= form_for(@forward) do |f| %>
+  <% if @forward.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forward.errors.count, "error") %> prohibited this forward from being saved:</h2>
+
+      <ul>
+      <% @forward.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :destination %><br />
+    <%= f.text_field :destination %>
+  </div>
+  <div class="field">
+    <%= f.label :domain %><br />
+    <%= f.collection_select :domain_id, Domain.all, :id, :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

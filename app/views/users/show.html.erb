@@ -1,0 +1,16 @@
+<%= render :partial => 'layouts/breadcrumb', :locals => { :domain => @user.domain }  %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Domain:</b>
+  <%= @user.domain.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %>

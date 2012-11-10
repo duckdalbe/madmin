@@ -1,0 +1,16 @@
+<%= render :partial => 'layouts/breadcrumb', :locals => { :domain => @forward.domain }  %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Address:</b>
+  <%= @forward.name %>@<%= @forward.domain.name %>
+</p>
+
+<p>
+  <b>Destination:</b>
+  <%= @forward.destination %>
+</p>
+
+
+<%= link_to 'Edit', edit_forward_path(@forward) %>

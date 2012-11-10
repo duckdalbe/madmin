@@ -1,0 +1,26 @@
+<p><%= link_to('Home', '/') %></p>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @domain.name %>
+</p>
+
+<h4>Users</h4>
+<% @domain.users.each do |user| %>
+  <p><%= link_to(user.name, user) %></p>
+<% end %>
+<%= link_to 'New User', new_user_path %>
+
+<h4>Forwards</h4>
+<% @domain.forwards.each do |forward| %>
+  <p><%= link_to(forward.name, forward) %></p>
+<% end %>
+<%= link_to 'New Forward', new_forward_path %>
+
+
+<hr />
+
+<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Destroy', @domain, method: :delete, data: { confirm: 'Are you sure?' } %>
