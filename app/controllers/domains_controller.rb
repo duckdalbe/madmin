@@ -33,9 +33,9 @@ class DomainsController < ApplicationController
   end
 
   # GET /domains/1/edit
-  def edit
-    @domain = Domain.find(params[:id])
-  end
+  #def edit
+  #  @domain = Domain.find(params[:id])
+  #end
 
   # POST /domains
   # POST /domains.json
@@ -55,19 +55,19 @@ class DomainsController < ApplicationController
 
   # PUT /domains/1
   # PUT /domains/1.json
-  def update
-    @domain = Domain.find(params[:id])
-
-    respond_to do |format|
-      if @domain.update_attributes(params[:domain])
-        format.html { redirect_to @domain, notice: 'Domain was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @domain.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #def update
+  #  @domain = Domain.find(params[:id])
+  #
+  #  respond_to do |format|
+  #    if @domain.update_attributes(params[:domain])
+  #      format.html { redirect_to @domain, notice: 'Domain was successfully updated.' }
+  #      format.json { head :no_content }
+  #    else
+  #      format.html { render action: "edit" }
+  #      format.json { render json: @domain.errors, status: :unprocessable_entity }
+  #    end
+  #  end
+  #end
 
   # DELETE /domains/1
   # DELETE /domains/1.json
