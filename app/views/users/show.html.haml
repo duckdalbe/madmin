@@ -1,0 +1,8 @@
+= render :partial => 'layouts/pagehead', :locals => { :domain => @user.domain }
+
+%h2 #{@user.name}@#{@user.domain.name}
+
+%h3 Forwards
+
+= link_to 'Edit', edit_user_path(@user)
+= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }

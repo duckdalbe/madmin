@@ -1,0 +1,8 @@
+#breadcrumb
+  #home= link_to('Home', '/')
+  - if defined?(domain)
+    #domain
+      »
+      = link_to(domain.name, domain)
+
+#notice= notice

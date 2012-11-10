@@ -36,3 +36,6 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use debugger
 # gem 'debugger'
+gem 'haml', '3.1.4'
+gem 'haml-rails'
+gem 'ruby_parser'

@@ -1,0 +1,22 @@
+= render 'layouts/pagehead'
+
+%h1= @domain.name
+
+= link_to 'Destroy', @domain, method: :delete, data: { confirm: 'Are you sure?' }
+%hr
+
+%h2 Users
+%ul
+  - @domain.users.each do |user|
+    %li= link_to(user.name, user)
+
+= link_to 'New User', new_user_path
+
+%hr
+%h2 Forwards
+%ul
+  - @domain.forwards.each do |forward|
+    %li= link_to(forward.name, forward)
+
+= link_to 'New Forward', new_forward_path
+

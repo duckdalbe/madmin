@@ -1,0 +1,6 @@
+%h1 Listing domains
+%ul
+  - @domains.each do |domain|
+    %li= link_to(domain.name, domain)
+
+= link_to 'New Domain', new_domain_path

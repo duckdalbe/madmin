@@ -1,0 +1,9 @@
+= render :partial => 'layouts/pagehead', :locals => { :domain => @forwards.first.domain }
+
+%h1 Forwards for #{@forwards.domain.name}
+
+%ul
+  - @forwards.each do |forward|
+    %li= link_to "#{forward.name} &rArr; #{forward.destination}", forward
+
+= link_to 'New Forward', new_forward_path

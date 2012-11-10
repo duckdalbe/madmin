@@ -1,0 +1,7 @@
+= form_for(@forward) do |f|
+  = render :partial => 'form_errors', :locals => { :obj => @forward }
+  .field
+    = f.label :destination
+    = f.text_field :destination
+  .actions
+    = f.submit
