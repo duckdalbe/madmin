@@ -1,6 +1,6 @@
 %h1 Editing user #{@user.name}
 
-= form_for(@user) do |f|
+= form_for([@domain, @user]) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @user }
   .field
     = f.label :password
@@ -11,4 +11,4 @@
   .actions
     = f.submit
 
-= link_to 'Show', @user
+= link_to 'Show', [@domain, @user]

@@ -1,6 +1,6 @@
-%h1 Editing forward
+%h1 Editing forward #{@forward.name}@#{@domain.name}
 
-= form_for(@forward) do |f|
+= form_for([@domain, @forward]) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @forward }
   .field
     = f.label :destination
@@ -8,4 +8,4 @@
   .actions
     = f.submit
 
-= link_to 'Show', @forward
+= link_to 'Show', [@domain, @forward]

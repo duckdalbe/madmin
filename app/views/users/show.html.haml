@@ -5,5 +5,5 @@
 %h3 Forwards
 %ul= render :partial => 'forwards/forward', :collection => @forwards
 
-= link_to 'Edit', edit_user_path(@user)
-= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' }
+= link_to 'Edit', edit_domain_user_path(@user.domain, @user)
+= link_to 'Delete', [@user.domain, @user], method: :delete, data: { confirm: 'Are you sure?' }

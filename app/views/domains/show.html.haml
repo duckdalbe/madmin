@@ -6,15 +6,12 @@
 %hr
 
 %h2 Users
-%ul
-  - @domain.users.each do |user|
-    %li= link_to(user.name, user)
-
-= link_to 'New User', new_user_path
+%ul= render :partial => 'users/user', :collection => @domain.users
+= link_to 'New User', new_domain_user_path(@domain)
 
 %hr
+
 %h2 Forwards
 %ul= render :partial => 'forwards/forward', :collection => @domain.forwards
-
-= link_to 'New Forward', new_forward_path
+= link_to 'New Forward', new_domain_forward_path(@domain)
 

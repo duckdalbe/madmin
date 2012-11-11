@@ -26,6 +26,7 @@ class ForwardsController < ApplicationController
   # GET /forwards/new.json
   def new
     @forward = Forward.new
+    @domain = Domain.find(params[:domain_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,8 +46,8 @@ class ForwardsController < ApplicationController
 
     respond_to do |format|
       if @forward.save
-        format.html { redirect_to @forward, notice: 'Forward was successfully created.' }
-        format.json { render json: @forward, status: :created, location: @forward }
+        format.html { redirect_to @domain, notice: 'Forward was successfully created.' }
+        format.json { render json: @domain, status: :created, location: @forward }
       else
         format.html { render action: "new" }
         format.json { render json: @forward.errors, status: :unprocessable_entity }
@@ -63,7 +64,7 @@ class ForwardsController < ApplicationController
 
     respond_to do |format|
       if @forward.update_attributes(params[:forward])
-        format.html { redirect_to @forward, notice: 'Forward was successfully updated.' }
+        format.html { redirect_to @domain, notice: 'Forward was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +80,7 @@ class ForwardsController < ApplicationController
     @forward.destroy
 
     respond_to do |format|
-      format.html { redirect_to forwards_url }
+      format.html { redirect_to @domain, notice: 'Forward was deleted.' }
       format.json { head :no_content }
     end
   end

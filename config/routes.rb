@@ -1,14 +1,14 @@
 IspmailAdmin::Application.routes.draw do
 
+  match '/login/new' => 'logins#new', :as => :new_login
   match '/login' => 'logins#create', :as => :create_login
   match '/logout' => 'logins#destroy', :as => :destroy_login
-  resources :logins
 
-  resources :forwards
 
-  resources :users
-
-  resources :domains
+  resources :domains do
+    resources :forwards
+    resources :users
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
