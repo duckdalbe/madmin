@@ -14,8 +14,16 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @forwards = Forward.where(:name => @user.name, :domain_id => @user.domain.id)
 
+    # Disallow if current_user isn't superadmin or domain-admin or request is
+    # not for own user-data.
+    if ! current_user.superadmin? &&
+        ! current_user.admin?(@user.domain) &&
+        current_user.id != @user.id
+      render403
+    end
+
+    @forwards = Forward.where(:name => @user.name, :domain_id => @user.domain.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }

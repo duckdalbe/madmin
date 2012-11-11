@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
       redirect_to new_login_url, :notice => "Please log in!"
     end
   end
+
+  def render403
+    render 'errors/403', :status => 403
+  end
 end
