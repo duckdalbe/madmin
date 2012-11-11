@@ -3,20 +3,6 @@ class UsersController < ApplicationController
   before_filter :load_user, :except => [:new, :create]
   before_filter :authorize
 
-  # GET /users
-  # GET /users.json
-  #def index
-  #  @users = User.all
-
-  #  respond_to do |format|
-  #    format.html # index.html.erb
-  #    format.json { render json: @users }
-  #  end
-  #end
-
-  # GET /users/1
-  # GET /users/1.json
-
   def authorize
     # Disallow if current_user isn't superadmin or domain-admin or request is
     # not for own user-data.
@@ -36,8 +22,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
   def new
     @user = User.new
 
@@ -47,12 +31,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(params[:user].merge(:domain_id => @domain.id))
 
@@ -67,8 +48,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.json
   def update
     # TODO: replace with dynamic attr_accessible, see <http://asciicasts.com/episodes/237-dynamic-attr-accessible>
     params.delete(:name)
@@ -85,8 +64,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
 

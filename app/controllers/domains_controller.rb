@@ -1,8 +1,6 @@
 class DomainsController < ApplicationController
   before_filter :load_domain, :only => [:show, :destroy]
 
-  # GET /domains
-  # GET /domains.json
   def index
     @domains = Domain.all
 
@@ -12,8 +10,6 @@ class DomainsController < ApplicationController
     end
   end
 
-  # GET /domains/1
-  # GET /domains/1.json
   def show
     respond_to do |format|
       format.html # show.html.erb
@@ -21,8 +17,6 @@ class DomainsController < ApplicationController
     end
   end
 
-  # GET /domains/new
-  # GET /domains/new.json
   def new
     @domain = Domain.new
 
@@ -32,13 +26,6 @@ class DomainsController < ApplicationController
     end
   end
 
-  # GET /domains/1/edit
-  #def edit
-  #  @domain = Domain.find(params[:id])
-  #end
-
-  # POST /domains
-  # POST /domains.json
   def create
     @domain = Domain.new(params[:domain])
 
@@ -53,24 +40,6 @@ class DomainsController < ApplicationController
     end
   end
 
-  # PUT /domains/1
-  # PUT /domains/1.json
-  #def update
-  #  @domain = Domain.find(params[:id])
-  #
-  #  respond_to do |format|
-  #    if @domain.update_attributes(params[:domain])
-  #      format.html { redirect_to @domain, notice: 'Domain was successfully updated.' }
-  #      format.json { head :no_content }
-  #    else
-  #      format.html { render action: "edit" }
-  #      format.json { render json: @domain.errors, status: :unprocessable_entity }
-  #    end
-  #  end
-  #end
-
-  # DELETE /domains/1
-  # DELETE /domains/1.json
   def destroy
     @domain.destroy
 
