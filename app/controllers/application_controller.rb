@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
   def render403
     render 'errors/403', :status => 403
   end
+
+  def load_domain
+    @domain = Domain.find(params[:domain_id])
+  end
 end

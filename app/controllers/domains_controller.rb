@@ -1,4 +1,6 @@
 class DomainsController < ApplicationController
+  before_filter :load_domain, :only => [:show, :destroy]
+
   # GET /domains
   # GET /domains.json
   def index
@@ -13,8 +15,6 @@ class DomainsController < ApplicationController
   # GET /domains/1
   # GET /domains/1.json
   def show
-    @domain = Domain.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @domain }
@@ -72,12 +72,17 @@ class DomainsController < ApplicationController
   # DELETE /domains/1
   # DELETE /domains/1.json
   def destroy
-    @domain = Domain.find(params[:id])
     @domain.destroy
 
     respond_to do |format|
       format.html { redirect_to domains_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def load_domain
+    @domain = Domain.find(params[:id])
   end
 end

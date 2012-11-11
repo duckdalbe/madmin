@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :load_domain
+  before_filter :load_user, :except => [:new, :create]
+
   # GET /users
   # GET /users.json
   #def index
@@ -13,8 +16,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-
     # Disallow if current_user isn't superadmin or domain-admin or request is
     # not for own user-data.
     if ! current_user.superadmin? &&
@@ -46,7 +47,6 @@ class UsersController < ApplicationController
     # TODO: replace with dynamic attr_accessible, see <http://asciicasts.com/episodes/237-dynamic-attr-accessible>
     params.delete(:name)
     params.delete(:domain)
-    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -68,7 +68,6 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -84,12 +83,17 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def load_user
+    @user = User.find(params[:id])
   end
 end

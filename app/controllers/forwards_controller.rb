@@ -1,4 +1,7 @@
 class ForwardsController < ApplicationController
+  before_filter :load_domain
+  before_filter :load_forward, :except => [:new, :create]
+
   # GET /forwards
   # GET /forwards.json
   #def index
@@ -26,7 +29,6 @@ class ForwardsController < ApplicationController
   # GET /forwards/new.json
   def new
     @forward = Forward.new
-    @domain = Domain.find(params[:domain_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,7 +38,6 @@ class ForwardsController < ApplicationController
 
   # GET /forwards/1/edit
   def edit
-    @forward = Forward.find(params[:id])
   end
 
   # POST /forwards
@@ -58,7 +59,6 @@ class ForwardsController < ApplicationController
   # PUT /forwards/1
   # PUT /forwards/1.json
   def update
-    @forward = Forward.find(params[:id])
     params.delete(:name)
     params.delete(:domain)
 
@@ -76,12 +76,17 @@ class ForwardsController < ApplicationController
   # DELETE /forwards/1
   # DELETE /forwards/1.json
   def destroy
-    @forward = Forward.find(params[:id])
     @forward.destroy
 
     respond_to do |format|
       format.html { redirect_to @domain, notice: 'Forward was deleted.' }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def load_forward
+    @forward = Forward.find(params[:id])
   end
 end
