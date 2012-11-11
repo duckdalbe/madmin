@@ -3,17 +3,6 @@ class UsersController < ApplicationController
   before_filter :load_user, :except => [:new, :create]
   before_filter :authorize
 
-  def authorize
-    # Disallow if current_user isn't superadmin or domain-admin or request is
-    # not for own user-data.
-    if ! current_user.superadmin? &&
-        ! current_user.admin?(@domain) &&
-        current_user.id != @user.id
-      render403
-      return
-    end
-  end
-
   def show
     @forwards = Forward.where(:name => @user.name, :domain_id => @user.domain.id)
     respond_to do |format|
@@ -77,5 +66,16 @@ class UsersController < ApplicationController
 
   def load_user
     @user = User.find(params[:id])
+  end
+
+  def authorize
+    # Disallow if current_user isn't superadmin or domain-admin or request is
+    # not for own user-data.
+    if ! current_user.superadmin? &&
+        ! current_user.admin?(@domain) &&
+        current_user.id != @user.id
+      render403
+      return
+    end
   end
 end

@@ -1,6 +1,7 @@
 class ForwardsController < ApplicationController
   before_filter :load_domain
   before_filter :load_forward, :except => [:new, :create]
+  before_filter :authorize
 
   def new
     @forward = Forward.new
@@ -56,5 +57,14 @@ class ForwardsController < ApplicationController
 
   def load_forward
     @forward = Forward.find(params[:id])
+  end
+
+  def authorize
+    # TODO: let users edit own forwards. (forward.name == user.name)
+    if ! current_user.superadmin? &&
+        ! current_user.admin?(@domain) 
+      render403
+      return
+    end
   end
 end
