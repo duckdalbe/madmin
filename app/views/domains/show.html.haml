@@ -1,8 +1,8 @@
 = render 'layouts/pagehead'
 
 %h1= @domain.name
+= link_to 'Delete', @domain, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'Destroy', @domain, method: :delete, data: { confirm: 'Are you sure?' }
 %hr
 
 %h2 Users
