@@ -49,9 +49,6 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    # TODO: replace with dynamic attr_accessible, see <http://asciicasts.com/episodes/237-dynamic-attr-accessible>
-    params.delete(:name)
-    params.delete(:domain)
   end
 
   # POST /users
@@ -73,6 +70,9 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    # TODO: replace with dynamic attr_accessible, see <http://asciicasts.com/episodes/237-dynamic-attr-accessible>
+    params.delete(:name)
+    params.delete(:domain)
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
