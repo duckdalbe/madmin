@@ -57,6 +57,8 @@ class ForwardsController < ApplicationController
   # PUT /forwards/1.json
   def update
     @forward = Forward.find(params[:id])
+    params.delete(:name)
+    params.delete(:domain)
 
     respond_to do |format|
       if @forward.update_attributes(params[:forward])
