@@ -1,3 +1,5 @@
+#logout= link_to('Logout', destroy_login_path)
+
 #breadcrumb
   #home= link_to('Home', '/')
   - if defined?(domain)
@@ -5,4 +7,3 @@
       »
       = link_to(domain.name, domain)
 
-#notice= notice

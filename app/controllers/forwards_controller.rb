@@ -1,25 +1,26 @@
 class ForwardsController < ApplicationController
   # GET /forwards
   # GET /forwards.json
-  def index
-    @forwards = Forward.all
+  #def index
+  #  @forwards = Forward.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @forwards }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html # index.html.erb
+  #    format.json { render json: @forwards }
+  #  end
+  #end
 
   # GET /forwards/1
   # GET /forwards/1.json
-  def show
-    @forward = Forward.find(params[:id])
+  #def show
+  #  @forward = Forward.find(params[:id])
+  #  @user = User.where(:name => @forward.name, :domain_id => @forward.domain.id)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @forward }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html # show.html.erb
+  #    format.json { render json: @forward }
+  #  end
+  #end
 
   # GET /forwards/new
   # GET /forwards/new.json

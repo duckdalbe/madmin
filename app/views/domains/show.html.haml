@@ -14,9 +14,7 @@
 
 %hr
 %h2 Forwards
-%ul
-  - @domain.forwards.each do |forward|
-    %li= link_to(forward.name, forward)
+%ul= render :partial => 'forwards/forward', :collection => @domain.forwards
 
 = link_to 'New Forward', new_forward_path
 

@@ -1,3 +1,11 @@
 %h1 Editing forward
-= render 'form'
+
+= form_for(@forward) do |f|
+  = render :partial => 'shared/form_errors', :locals => { :obj => @forward }
+  .field
+    = f.label :destination
+    = f.text_field :destination
+  .actions
+    = f.submit
+
 = link_to 'Show', @forward

@@ -1,0 +1,12 @@
+= form_tag(create_login_path) do
+  .field 
+    = label_tag :name
+    = text_field_tag :name
+  .field
+    = label_tag :domain
+    = text_field_tag :domain
+  .field
+    = label_tag :password
+    = password_field_tag :password
+  = submit_tag 'Login'
+

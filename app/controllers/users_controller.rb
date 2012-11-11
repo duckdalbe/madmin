@@ -1,19 +1,20 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
-  def index
-    @users = User.all
+  #def index
+  #  @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
-  end
+  #  respond_to do |format|
+  #    format.html # index.html.erb
+  #    format.json { render json: @users }
+  #  end
+  #end
 
   # GET /users/1
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    @forwards = Forward.where(:name => @user.name, :domain_id => @user.domain.id)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,6 +35,9 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    # TODO: replace with dynamic attr_accessible, see <http://asciicasts.com/episodes/237-dynamic-attr-accessible>
+    params.delete(:name)
+    params.delete(:domain)
     @user = User.find(params[:id])
   end
 

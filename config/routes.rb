@@ -1,5 +1,9 @@
 IspmailAdmin::Application.routes.draw do
 
+  match '/login' => 'logins#create', :as => :create_login
+  match '/logout' => 'logins#destroy', :as => :destroy_login
+  resources :logins
+
   resources :forwards
 
   resources :users
