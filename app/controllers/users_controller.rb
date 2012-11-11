@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :load_domain
   before_filter :load_user, :except => [:new, :create]
+  before_filter :authorize
 
   # GET /users
   # GET /users.json
@@ -15,15 +16,19 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  def show
+
+  def authorize
     # Disallow if current_user isn't superadmin or domain-admin or request is
     # not for own user-data.
     if ! current_user.superadmin? &&
-        ! current_user.admin?(@user.domain) &&
+        ! current_user.admin?(@domain) &&
         current_user.id != @user.id
       render403
+      return
     end
+  end
 
+  def show
     @forwards = Forward.where(:name => @user.name, :domain_id => @user.domain.id)
     respond_to do |format|
       format.html # show.html.erb
