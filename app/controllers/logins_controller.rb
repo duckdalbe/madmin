@@ -11,7 +11,13 @@ class LoginsController < ApplicationController
     user = User.where(:name => params[:name], :domain_id => domain.try(:id)).first
     if user.try(:authenticate, params[:password])
       session[:current_user_id] = user.id
-      redirect_to user
+      if user.superadmin?
+        redirect_to root_url
+      elsif user.admin?(domain)
+        redirect_to domain
+      else
+        redirect_to [domain, user]
+      end
     else
       flash[:notice] = 'Wrong credentials, please try again.'
       render 'logins/new'
