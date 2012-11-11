@@ -1,15 +1,7 @@
 = form_for(@domain) do |f|
-  - if @domain.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@domain.errors.count, "error")
-        prohibited this domain from being saved:
-      %ul
-        - @domain.errors.full_messages.each do |msg|
-        %li= msg
-.field
-  = f.label :name
-  %br
-  = f.text_field :name
-.actions
-  = f.submit
+  = render :partial => 'shared/form_errors', :locals => { :obj => @domain }
+  .field
+    = f.label :name
+    = f.text_field :name
+  .actions
+    = f.submit
