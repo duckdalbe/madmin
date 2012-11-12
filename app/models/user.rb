@@ -12,4 +12,10 @@ class User < ActiveRecord::Base
   def superadmin?
     self.domain.name == 'example.org' && self.name == 'postmaster'
   end
+
+  def self.find_by_email(email)
+    name, domain_name = email.split('@')
+    domain = Domain.find_by_name(domain_name)
+    self.where(:name => name, :domain_id => domain.try(:id)).first || false
+  end
 end
