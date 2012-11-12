@@ -5,4 +5,12 @@ class Forward < ActiveRecord::Base
       :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
   validates :name, :presence => true
   validates :domain, :presence => { :message => 'does not exist' }
+
+  def as_json(options={})
+    {
+      :name => self.name,
+      :id => self.id,
+      :destination => self.destination
+    }
+  end
 end

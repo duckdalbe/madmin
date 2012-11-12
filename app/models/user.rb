@@ -26,4 +26,16 @@ class User < ActiveRecord::Base
     domain = Domain.find_by_name(domain_name)
     self.where(:name => name, :domain_id => domain.try(:id)).first || false
   end
+
+  def as_json(options={})
+    {
+      :name => self.name,
+      :id => self.id,
+      :domain => {
+        :id => self.domain.id,
+        :name => self.domain.name
+        },
+      :forwards => self.forwards
+    }
+  end
 end
