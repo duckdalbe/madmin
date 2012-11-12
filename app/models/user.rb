@@ -1,5 +1,13 @@
 class User < ActiveRecord::Base
+  # TODO: specify dependent-options
   belongs_to :domain
+  has_many :forwards, :finder_sql => Proc.new {
+    %Q{
+      select distinct *
+      from forwards
+      where name = '#{name}' and domain_id = '#{domain_id}'
+    }
+  }
   attr_accessible :name, :password, :password_confirmation, :domain_id
   validates :name, :presence => true
   validates :domain, :presence => true

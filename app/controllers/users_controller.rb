@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_filter :authorize
 
   def show
-    @forwards = Forward.where(:name => @user.name, :domain_id => @user.domain.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
