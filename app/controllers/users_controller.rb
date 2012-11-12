@@ -3,10 +3,13 @@ class UsersController < ApplicationController
   before_filter :load_user, :except => [:new, :create, :home]
   before_filter :authorize, :except => [:home]
 
+  # TODO: abandon @domain, use @user.domain
+  # TODO: fix breadcrumb to include only allowed links (or none?)
+
   def home
     @user = current_user
     respond_to do |f|
-      f.html
+      f.html { render action: 'show' }
       f.json { render json: @user }
     end
   end
