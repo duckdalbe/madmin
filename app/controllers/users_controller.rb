@@ -1,7 +1,15 @@
 class UsersController < ApplicationController
-  before_filter :load_domain
-  before_filter :load_user, :except => [:new, :create]
-  before_filter :authorize
+  before_filter :load_domain, :except => [:home]
+  before_filter :load_user, :except => [:new, :create, :home]
+  before_filter :authorize, :except => [:home]
+
+  def home
+    @user = current_user
+    respond_to do |f|
+      f.html
+      f.json { render json: @user }
+    end
+  end
 
   def show
     respond_to do |format|
