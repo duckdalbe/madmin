@@ -1,6 +1,7 @@
 IspmailAdmin::Application.routes.draw do
 
   match '/login/new' => 'logins#new', :as => :new_login
+  match '/login/cookiesrequired' => 'logins#cookiesrequired', :as => :cookiesrequired_login
   match '/login' => 'logins#create', :as => :create_login
   match '/logout' => 'logins#destroy', :as => :destroy_login
 

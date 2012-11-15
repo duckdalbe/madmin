@@ -1,8 +1,23 @@
 class LoginsController < ApplicationController
-  skip_before_filter :authenticate, :only => [:new, :create]
+  skip_before_filter :authenticate, :only => [:new, :create, :cookiesrequired]
+
+  # TODO: redirect to previous url after successful login: redirect_back_or_default(foo).
+
+  def cookiesrequired
+    if session[:cookietest] == true
+      redirect_to new_login_url
+    end
+  end
 
   def new
-    #
+    # No session-cookie means first request or cookies disabled. If it's the
+    # first request the cookierequired-test will redirect back here and then
+    # we've got a session.
+    if cookies[sessionkey].blank?
+      session[:cookietest] = true
+      redirect_to cookiesrequired_login_url
+      return
+    end
   end
 
   # login
@@ -29,5 +44,11 @@ class LoginsController < ApplicationController
     @_current_user = session[:current_user_id] = nil
     flash[:notice] = "Logout successful. Have a nice day!"
     redirect_to new_login_path
+  end
+
+  private
+
+  def sessionkey
+    Rails.application.config.session_options[:key]
   end
 end
