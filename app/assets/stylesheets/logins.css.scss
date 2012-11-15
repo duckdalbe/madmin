@@ -1,3 +1,12 @@
 // Place all the styles related to the Logins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.cookies-required {
+  font-weight: bold;
+  font-size: 1.2em;
+  text-align: center;
+}
+#msg {
+  margin: 5em;
+  color: #cc0000;
+}
