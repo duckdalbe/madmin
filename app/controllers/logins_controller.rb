@@ -36,7 +36,7 @@ class LoginsController < ApplicationController
       end
     else
       flash[:notice] = 'Wrong credentials, please try again.'
-      render 'logins/new'
+      redirect_to new_login_path
     end
   end
 
