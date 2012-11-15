@@ -17,7 +17,9 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html do
         if !current_user
-          redirect_to new_login_url, :notice => "Please log in!"
+          session[:return_to] = request.fullpath
+          flash[:notice] = "Please log in!"
+          redirect_to new_login_url
         end
       end
       format.json do

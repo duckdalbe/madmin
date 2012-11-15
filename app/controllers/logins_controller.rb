@@ -1,8 +1,6 @@
 class LoginsController < ApplicationController
   skip_before_filter :authenticate, :only => [:new, :create, :cookiesrequired]
 
-  # TODO: redirect to previous url after successful login: redirect_back_or_default(foo).
-
   def cookiesrequired
     if session[:cookietest] == true
       redirect_to new_login_url
@@ -26,7 +24,10 @@ class LoginsController < ApplicationController
     user = User.where(:name => params[:name], :domain_id => domain.try(:id)).first
     if user.try(:authenticate, params[:password])
       session[:current_user_id] = user.id
-      if user.superadmin?
+      if session[:return_to].present?
+        redirect_to session[:return_to]
+        session[:return_to] = nil
+      elsif user.superadmin?
         redirect_to root_url
       elsif user.admin?(domain)
         redirect_to domain
