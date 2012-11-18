@@ -2,8 +2,6 @@
 
 #breadcrumb
   #home= link_to('Home', '/')
+  #domains= domains_link
   - if defined?(domain)
-    #domain
-      »
-      = link_to(domain.name, domain)
-
+    #domain= domain_link(domain)
