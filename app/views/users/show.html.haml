@@ -2,8 +2,18 @@
 
 %h2 #{@user.name}@#{@user.domain.name}
 
-%h3 Forwards
-%ul= render :partial => 'forwards/forward', :collection => @forwards
-
 = link_to 'Edit', edit_domain_user_path(@user.domain, @user)
 = link_to 'Delete', [@user.domain, @user], method: :delete, data: { confirm: 'Are you sure?' }
+
+%hr
+
+%h3 Forwards
+%ul= render(@user.forwards) || 'None'
+
+%h4 New forward
+= form_for([@user.domain, Forward.new]) do |f|
+  #{@user.name}@#{@user.domain.name}
+  = f.hidden_field :name, :value => @user.name
+  &rarr;
+  = f.text_field :destination
+  = f.submit
