@@ -1,12 +1,20 @@
 !!!
-%html
+%html{:lang => 'en'}
   %head
     %title IspmailAdmin
     = stylesheet_link_tag    "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    #flash
-      .notice= flash[:notice]
-      .error= flash[:error]
-    = yield
+    .navbar
+      .navbar-inner
+        .container
+          %a.brand madmin
+    .container
+      .row
+        .span3
+          Home
+        .span9
+          .alert-message.notice= flash[:notice]
+          .alert-message.error= flash[:error]
+          = yield
