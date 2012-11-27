@@ -12,6 +12,10 @@ class ForwardsController < ApplicationController
     end
   end
 
+  def show
+    @user = @forward.user
+  end
+
   def edit
   end
 

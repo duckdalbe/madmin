@@ -1,6 +1,1 @@
-%li.user
-  %span.show-link
-    = link_to(user.name, domain_user_path(user.domain, user))
-  %span.edit-link
-    = link_to('(edit)', edit_domain_user_path([user.domain, user]))
-  
+%li.user= link_to user.name, domain_user_path(@domain, user)

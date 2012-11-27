@@ -1,7 +1,8 @@
-= form_for(@domain) do |f|
-  = render :partial => 'shared/form_errors', :locals => { :obj => @domain }
-  .field
-    = f.label :name
-    = f.text_field :name
-  .actions
-    = f.submit
+= form_for @domain, :html => { :class => 'form-horizontal' } do |f|
+  .control-group
+    = f.label :name, :class => 'control-label'
+    .controls
+      = f.text_field :name, :class => 'text_field'
+  .form-actions
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), domains_path, :class => 'btn'

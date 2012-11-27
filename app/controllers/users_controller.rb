@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user
+    @domain = current_user.domain
     respond_to do |f|
       f.html { render action: 'show' }
       f.json { render json: @user }

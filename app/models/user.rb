@@ -38,4 +38,8 @@ class User < ActiveRecord::Base
       :forwards => self.forwards
     }
   end
+
+  def email
+    [self.name, self.domain.name].join '@'
+  end
 end

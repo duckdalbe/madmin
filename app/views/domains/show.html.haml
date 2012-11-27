@@ -1,17 +1,22 @@
-= render 'layouts/pagehead'
+.page-header
+  %h1= @domain.name
 
-%h1= @domain.name
-= link_to 'Delete', @domain, method: :delete, data: { confirm: 'Are you sure?' }
+.well
+  %ul
+    %li #{Domain.human_attribute_name(:created_at)}: #{l @domain.created_at}.
+    %li #{Domain.human_attribute_name(:updated_at)}: #{l @domain.updated_at}.
+    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), domain_path(@domain), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    .clearfix
 
-%hr
 
-%h2 Users
-%ul= render :partial => 'users/user', :collection => @domain.users
-= link_to 'New User', new_domain_user_path(@domain)
+.well
+  %h3 Users
+  %ul= render @domain.users
 
-%hr
+  = link_to t('.users.new', :default => t("helpers.links.new")), new_domain_user_path(@domain), :class => 'btn btn-primary'
 
-%h2 Forwards
-%ul= render :partial => 'forwards/forward', :collection => @domain.forwards
-= link_to 'New Forward', new_domain_forward_path(@domain)
+.well
+  %h3 Forwards
+  %ul= render @domain.forwards
 
+  = link_to t('.forwards.new', :default => t("helpers.links.new")), new_domain_forward_path(@domain), :class => 'btn btn-primary'

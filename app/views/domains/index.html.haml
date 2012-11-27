@@ -1,6 +1,6 @@
-%h1 Listing domains
-%ul
-  - @domains.each do |domain|
-    %li= link_to(domain.name, domain)
+.page-header
+  %h1 Domains
 
-= link_to 'New Domain', new_domain_path
+%ul= render @domains
+
+= link_to t('.new', :default => t("helpers.links.new")), new_domain_path, :class => 'btn btn-primary'

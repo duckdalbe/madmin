@@ -1,19 +1,22 @@
-= render :partial => 'layouts/pagehead', :locals => { :domain => @user.domain }
+.page-header
+  %h1= @user.email
 
-%h2 #{@user.name}@#{@user.domain.name}
 
-= link_to 'Edit', edit_domain_user_path(@user.domain, @user)
-= link_to 'Delete', [@user.domain, @user], method: :delete, data: { confirm: 'Are you sure?' }
+.well
+  %ul
+    %li #{User.human_attribute_name(:created_at)}: #{l @user.created_at}.
+    %li #{User.human_attribute_name(:updated_at)}: #{l @user.updated_at}.
+  .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), domain_user_path(@domain, @user), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+  = link_to 'Edit', edit_domain_user_path(@domain, @user), :class => 'btn'
 
-%hr
+.well
+  %h3 Forwards
+  %ul= render(@user.forwards) || 'None'
 
-%h3 Forwards
-%ul= render(@user.forwards) || 'None'
-
-%h4 New forward
-= form_for([@user.domain, Forward.new]) do |f|
-  #{@user.name}@#{@user.domain.name}
-  = f.hidden_field :name, :value => @user.name
-  &rarr;
-  = f.text_field :destination
-  = f.submit
+  %h4 New forward
+  = form_for([@user.domain, Forward.new]) do |f|
+    #{@user.name}@#{@user.domain.name}
+    = f.hidden_field :name, :value => @user.name
+    &rarr;
+    = f.text_field :destination
+    = f.submit

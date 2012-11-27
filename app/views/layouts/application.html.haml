@@ -9,12 +9,12 @@
     .navbar
       .navbar-inner
         .container
-          %a.brand madmin
+          .brand madmin
+          = render 'navbar'
     .container
       .row
-        .span3
-          Home
-        .span9
+        = render 'breadcrumb'
+        .span10
           .alert-message.notice= flash[:notice]
           .alert-message.error= flash[:error]
           = yield

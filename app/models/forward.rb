@@ -13,4 +13,12 @@ class Forward < ActiveRecord::Base
       :destination => self.destination
     }
   end
+
+  def user
+    User.find_by_name_and_domain_id self.name, self.domain
+  end
+
+  def email
+    [self.name, self.domain.name].join '@'
+  end
 end

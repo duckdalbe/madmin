@@ -1,0 +1,5 @@
+- if current_user.present?
+  %ul.nav
+    %li= link_to 'My account', root_url
+    %li#logout= link_to('Logout', destroy_login_path)
+

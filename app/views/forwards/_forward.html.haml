@@ -1,8 +1,2 @@
 %li.forward
-  #{forward.name} → #{forward.destination}
-  %span.edit-link
-    = link_to('(edit)', edit_domain_forward_path(forward.domain, forward))
-  %span.delete-link
-    -# TODO: delete without javascript?
-    = link_to('(delete)', domain_forward_path(forward.domain, forward), method: :delete, data: { confirm: 'Are you sure?' })
-  
+  = link_to "#{forward.name} → #{forward.destination}", domain_forward_path(forward.domain, forward)
