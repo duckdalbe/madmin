@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     domain.id == self.domain.id && self.name == 'postmaster'
   end
 
+  def domadmin?
+    self.name == 'postmaster'
+  end
+
   def superadmin?
     self.domain.name == 'example.org' && self.name == 'postmaster'
   end

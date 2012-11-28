@@ -1,10 +1,6 @@
 class DomainsController < ApplicationController
-  before_filter :load_domain, :only => [:show, :destroy]
-  before_filter :authorize, :except => [:show]
 
   def index
-    @domains = Domain.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @domains }
@@ -12,11 +8,6 @@ class DomainsController < ApplicationController
   end
 
   def show
-    if ! current_user.superadmin? && ! current_user.admin?(@domain)
-      render403
-      return
-    end
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @domain }
@@ -24,8 +15,6 @@ class DomainsController < ApplicationController
   end
 
   def new
-    @domain = Domain.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @domain }
@@ -33,8 +22,6 @@ class DomainsController < ApplicationController
   end
 
   def create
-    @domain = Domain.new(params[:domain])
-
     respond_to do |format|
       if @domain.save
         format.html { redirect_to @domain, notice: 'Domain was successfully created.' }
@@ -55,16 +42,4 @@ class DomainsController < ApplicationController
     end
   end
 
-  private
-
-  def load_domain
-    @domain = Domain.find(params[:id])
-  end
-
-  def authorize
-    if ! current_user.superadmin?
-      render403
-      return
-    end
-  end
 end

@@ -1,14 +1,11 @@
 - if current_user.present?
   %ul.breadcrumb
-    %li#home
-      = link_to('Home', '/')
-    - if current_user.superadmin?
+    - if can? :read, @domain
       %span.divider »
       %li#domains= link_to_unless_current 'Domains', domains_path
-    - if @domain.present? && (current_user.superadmin? || current_user.admin?(@domain))
+      - if @domain.present?
+        %span.divider »
+        %li#domain= link_to_unless_current @domain.name, @domain
+    - if @user.try(:id)
       %span.divider »
-      %li#domain= link_to_unless_current @domain.name, domain_path(@domain)
-    - if @user.present?
-      %span.divider »
-      %li#user= link_to_unless_current @user.email, domain_user_path(@domain, @user)
-
+      %li#user= link_to_unless_current @user.email, [@domain, @user]

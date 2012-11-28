@@ -1,5 +1,7 @@
 class LoginsController < ApplicationController
-  skip_before_filter :authenticate, :only => [:new, :create, :cookiesrequired]
+  skip_before_filter :authenticate
+  skip_load_and_authorize_resource
+  skip_authorization_check
 
   def cookiesrequired
     if session[:cookietest] == true
@@ -27,10 +29,6 @@ class LoginsController < ApplicationController
       if session[:return_to].present?
         redirect_to session[:return_to]
         session[:return_to] = nil
-      elsif user.superadmin?
-        redirect_to root_url
-      elsif user.admin?(domain)
-        redirect_to domain
       else
         redirect_to [domain, user]
       end

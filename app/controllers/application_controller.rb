@@ -1,7 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate
+  load_and_authorize_resource
+  # ensure authorization is checked.
+  check_authorization
   helper_method :current_user
+
+  rescue_from CanCan::AccessDenied do |exception|
+    render403
+  end
 
   private
 
@@ -45,9 +52,5 @@ class ApplicationController < ActionController::Base
         render :text => "Forbidden".to_json, :status => :forbidden
       end
     end
-  end
-
-  def load_domain
-    @domain = Domain.find(params[:domain_id])
   end
 end
