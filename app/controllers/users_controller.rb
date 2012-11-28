@@ -35,11 +35,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    # TODO: replace with dynamic attr_accessible, see
+    # TODO: use dynamic attr_accessible, see
     # <http://asciicasts.com/episodes/237-dynamic-attr-accessible>.
-    params.delete(:name)
-    params.delete(:domain)
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html {

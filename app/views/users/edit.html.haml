@@ -2,6 +2,10 @@
 
 = form_for([@domain, @user]) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @user }
+  - if current_user.superadmin?
+    .field
+      = f.label :role
+      = f.collection_select :role, User::ROLES, :to_s, :humanize
   .field
     = f.label :password
     = f.password_field :password

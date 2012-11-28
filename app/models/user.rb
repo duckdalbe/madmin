@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  ROLES = %w(user admin superadmin)
+
   # TODO: specify dependent-options
   belongs_to :domain
   has_many :forwards, :finder_sql => Proc.new {
@@ -8,21 +10,23 @@ class User < ActiveRecord::Base
       where name = '#{name}' and domain_id = '#{domain_id}'
     }
   }
-  attr_accessible :name, :password, :password_confirmation, :domain_id
+  attr_accessible :name, :password, :password_confirmation, :domain_id, :role
   validates :name, :presence => true
   validates :domain, :presence => true
+  validates :role, :inclusion => { :in => User::ROLES }
   has_secure_password
 
-  def admin?(domain)
-    domain.id == self.domain.id && self.name == 'postmaster'
+  def has_role?(role)
+    ROLES.index(role.to_s) <= ROLES.index(self.role.to_s)
   end
 
-  def domadmin?
-    self.name == 'postmaster'
+  def admin?
+    self.name == 'postmaster' || has_role?(:admin)
   end
 
   def superadmin?
-    self.domain.name == 'example.org' && self.name == 'postmaster'
+    (self.domain.name == 'example.org' && self.name == 'postmaster') ||
+        has_role?(:superadmin)
   end
 
   def self.find_by_email(email)

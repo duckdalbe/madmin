@@ -5,7 +5,7 @@ class Ability
     user ||= User.new
     if user.superadmin?
       can :manage, :all
-    elsif user.domadmin?
+    elsif user.admin?
       can [:read, :update], Domain, :id => user.domain.id
       can :manage, [User, Forward], :domain_id => user.domain.id
     else

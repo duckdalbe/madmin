@@ -6,6 +6,7 @@
   %ul
     %li #{User.human_attribute_name(:created_at)}: #{l @user.created_at}.
     %li #{User.human_attribute_name(:updated_at)}: #{l @user.updated_at}.
+    %li #{User.human_attribute_name(:role)}: #{@user.role.try(:humanize)}.
   .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), domain_user_path(@domain, @user), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
   = link_to 'Edit', edit_domain_user_path(@domain, @user), :class => 'btn'
 
