@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user.write_attribute(:domain_id => @domain.id)
+    @user.domain_id = @domain.id
+    @user.role = User::ROLES.first
 
     respond_to do |format|
       if @user.save
@@ -52,6 +53,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    if ! @user.destroyable?
+      flash[:error] = 'Account may not be deleted.'
+      redirect_to :back
+      return false
+    end
+
     domain = @user.domain
     @user.destroy
 

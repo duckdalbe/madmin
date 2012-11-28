@@ -22,9 +22,13 @@ class DomainsController < ApplicationController
   end
 
   def create
+    # TODO: create postmaster-account on the go.
     respond_to do |format|
       if @domain.save
-        format.html { redirect_to @domain, notice: 'Domain was successfully created.' }
+        format.html {
+          redirect_to @domain,
+              notice: "Domain #{@domain.name} was successfully created."
+        }
         format.json { render json: @domain, status: :created, location: @domain }
       else
         format.html { render action: "new" }
@@ -34,10 +38,14 @@ class DomainsController < ApplicationController
   end
 
   def destroy
+    d = @domain.dup
     @domain.destroy
 
     respond_to do |format|
-      format.html { redirect_to domains_url }
+      format.html {
+        redirect_to domains_url,
+            notice: "Domain #{d.name} was successfully deleted."
+      }
       format.json { head :no_content }
     end
   end

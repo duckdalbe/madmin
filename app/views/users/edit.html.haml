@@ -2,7 +2,8 @@
 
 = form_for([@domain, @user]) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @user }
-  - if current_user.superadmin?
+  -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
+  - if current_user.superadmin? && ! @user.postmaster?
     .field
       = f.label :role
       = f.collection_select :role, User::ROLES, :to_s, :humanize

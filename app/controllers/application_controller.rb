@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     render403
   end
 
+  rescue_from ActiveRecord::DeleteRestrictionError do |exc|
+    flash[:error] = exc
+  end
+
   private
 
   def current_user

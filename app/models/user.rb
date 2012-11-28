@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   ROLES = %w(user admin superadmin)
 
-  # TODO: specify dependent-options
   belongs_to :domain
   has_many :forwards, :finder_sql => Proc.new {
     %Q{
@@ -16,16 +15,25 @@ class User < ActiveRecord::Base
   validates :role, :inclusion => { :in => User::ROLES }
   has_secure_password
 
+  def destroyable?
+    ! self.postmaster?
+  end
+
   def has_role?(role)
-    ROLES.index(role.to_s) <= ROLES.index(self.role.to_s)
+    ROLES.index(role.to_s) <= ROLES.index(self.role.to_s).to_i
   end
 
   def admin?
-    self.name == 'postmaster' || has_role?(:admin)
+    self.postmaster? || has_role?(:admin)
+  end
+
+  def postmaster?
+    self.name == 'postmaster'
   end
 
   def superadmin?
-    (self.domain.name == 'example.org' && self.name == 'postmaster') ||
+    # TODO: find a better algorithm which account to nail as superadmin.
+    (self.domain.id == Domain.first.id && self.postmaster?) ||
         has_role?(:superadmin)
   end
 

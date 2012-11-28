@@ -15,6 +15,6 @@
       .row
         = render 'breadcrumb'
         .span10
-          .alert-message.notice= flash[:notice]
-          .alert-message.error= flash[:error]
+          .text-info= flash[:notice]
+          .text-error= flash[:error]
           = yield
