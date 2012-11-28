@@ -1,4 +1,4 @@
-IspmailAdmin::Application.routes.draw do
+Madmin::Application.routes.draw do
 
   match '/login/new' => 'logins#new', :as => :new_login
   match '/login/cookiesrequired' => 'logins#cookiesrequired', :as => :cookiesrequired_login

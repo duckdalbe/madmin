@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-IspmailAdmin::Application.load_tasks
+Madmin::Application.load_tasks
