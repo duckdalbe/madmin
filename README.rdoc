@@ -2,9 +2,12 @@
 
 A simple mail administration-interface for web and command-line.
 
+
 === TODO
 
-* Use CanCan
-  * define privileges as assignable roles as in <https://github.com/ryanb/cancan/wiki/Role-Based-Authorization>
 * Implement/fix bin/*
-* Maybe use Device?
+  * Maybe implement madmin-auth.rb to authenticate directly against the DB to
+    make it faster.
+* Test if Devise would save effort.
+
+Also see `rake notes`.
