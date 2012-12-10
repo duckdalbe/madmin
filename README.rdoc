@@ -2,12 +2,41 @@
 
 A simple mail administration-interface for web and command-line.
 
+This is work in progress and not yet production-ready.
+
+To get started:
+
+1. Install bundler if you haven't already: `gem install bundler`.
+2. Install dependencies of madmin via bundler: `bundle install`.
+3. Review/change config/database.yml if you wish.
+4. Setup database: `bundle exec rake db:setup`.
+5. Start the server: `bundle exec rails server`.
+6. Point your browser to <http://localhost:3000/>.
+7. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
+   for now, please).
+
 
 === TODO
 
 * Implement/fix bin/*
   * Maybe implement madmin-auth.rb to authenticate directly against the DB to
     make it faster.
-* Test if Devise would save effort.
+* Test if using Devise would save effort.
+* How to handle the situation in which a (super)admin creates a forward with a
+  name that's already used for a user. Should be prohibited unless the user's
+  ok with that. How?
 
 Also see `rake notes`.
+
+
+=== Feedback
+
+Please use the issue-tracker at <https://github.com/duckdalbe/madmin/> or
+<mailto:madmin@duckdalbe.org>.
+
+
+=== License
+
+GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>.
+
+TODO: embed legal text here.
