@@ -5,3 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Domain.create(name: 'example.org')
+User.create(name: 'postmaster', domain_id: Domain.first.id, password: 'morepasta!', role: 'superadmin')
