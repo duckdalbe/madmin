@@ -16,7 +16,7 @@ class ForwardsController < ApplicationController
   end
 
   def create
-    @forward.write_attribute(:domain_id, @domain.id)
+		@forward.domain_id=@domain.id
 
     respond_to do |format|
       if @forward.save
