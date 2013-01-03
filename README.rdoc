@@ -10,9 +10,10 @@ To get started:
 2. Install dependencies of madmin via bundler: `bundle install`.
 3. Review/change config/database.yml if you wish.
 4. Setup database: `bundle exec rake db:setup`.
-5. Start the server: `bundle exec rails server`.
-6. Point your browser to <http://localhost:3000/>.
-7. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
+5. Change the secret in config/initializers/secret_token.rb
+6. Start the server: `bundle exec rails server`.
+7. Point your browser to <http://localhost:3000/>.
+8. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
    for now, please).
 
 
