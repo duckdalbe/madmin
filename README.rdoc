@@ -12,7 +12,8 @@ To get started:
 4. Setup database: `bundle exec rake db:setup`.
 5. Change the secret in config/initializers/secret_token.rb
 6. Start the server: `bundle exec rails server`.
-7. Point your browser to <http://localhost:3000/>.
+7. Point your browser to <http://localhost:3000/>, login as
+   'postmaster@example.org' using the password 'morepasta!'.
 8. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
    for now, please).
 
@@ -26,6 +27,10 @@ To get started:
 * How to handle the situation in which a (super)admin creates a forward with a
   name that's already used for a user. Should be prohibited unless the user's
   ok with that. How?
+* Fail authentication if any two of (hash(user-agent), hash(username), ip)
+  appeared in more than two failed login-attempts within the last hour. (Model
+  FailedLogin that gets a new record on every failed login attempt.)
+
 
 Also see `rake notes`.
 
