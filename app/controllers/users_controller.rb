@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   load_resource :domain
 
+  def confirm_destroy
+  end
+
   def show
     respond_to do |format|
       format.html

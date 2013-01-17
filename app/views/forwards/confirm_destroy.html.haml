@@ -1,0 +1,5 @@
+%h1 Are you sure you want to delete the forward #{@forward.email} &rarr; #{@forward.destination}?
+
+= form_for([@domain, @forward], :html => { :method => :delete }) do |f|
+  = submit_tag t('destroy'), :class => 'btn btn-danger'
+  = link_to :cancel, [@domain, @forward]

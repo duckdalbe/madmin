@@ -7,8 +7,19 @@ Madmin::Application.routes.draw do
 
 
   resources :domains do
-    resources :forwards
-    resources :users
+    member do
+      get 'confirm_destroy'
+    end
+    resources :forwards do
+      member do
+        get 'confirm_destroy'
+      end
+    end
+    resources :users do
+      member do
+        get 'confirm_destroy'
+      end
+    end
   end
 
   # The priority is based upon order of creation:

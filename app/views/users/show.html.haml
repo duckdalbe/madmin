@@ -15,6 +15,6 @@
       %li.text-info Email is <strong>not</strong> stored but forwarded to #{@user.forward_destination}.
 
   - if @user.destroyable?
-    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), domain_user_path(@domain, @user), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_user_path(@domain, @user), :class => 'btn btn-danger'
   = link_to 'Edit', edit_domain_user_path(@domain, @user), :class => 'btn'
 

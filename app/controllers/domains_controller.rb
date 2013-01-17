@@ -7,9 +7,12 @@ class DomainsController < ApplicationController
     end
   end
 
+  def confirm_destroy
+  end
+
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @domain }
     end
   end

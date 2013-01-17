@@ -1,0 +1,6 @@
+%h1 Are you sure you want to delete the user #{@user.email}?
+
+= form_for([@domain, @user], :html => { :method => :delete }) do |f|
+  = submit_tag t("destroy"), :class => 'btn btn-danger'
+  = link_to :cancel, [@domain, @user]
+

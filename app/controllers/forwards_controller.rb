@@ -8,6 +8,9 @@ class ForwardsController < ApplicationController
     end
   end
 
+  def confirm_destroy
+  end
+
   def show
   end
 

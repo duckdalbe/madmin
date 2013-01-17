@@ -5,7 +5,7 @@
   %ul
     %li #{Domain.human_attribute_name(:created_at)}: #{l @domain.created_at}.
     %li #{Domain.human_attribute_name(:updated_at)}: #{l @domain.updated_at}.
-    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), domain_path(@domain), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
+    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_path(@domain), :class => 'btn btn-danger'
     .clearfix
 
 
