@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def create
     @user.domain_id = @domain.id
-    @user.role = User::ROLES.first
+    @user.role = ROLES.first
 
     respond_to do |format|
       if @user.save

@@ -1,19 +1,15 @@
 class User < ActiveRecord::Base
-  ROLES = %w(user admin superadmin)
-
   belongs_to :domain
-  has_many :forwards, :finder_sql => Proc.new {
-    %Q{
-      select distinct *
-      from forwards
-      where name = '#{name}' and domain_id = '#{domain_id}'
-    }
-  }
-  attr_accessible :name, :password, :password_confirmation, :domain_id, :role
+  has_secure_password
+  attr_accessible :name, :password, :password_confirmation, :domain_id, :role, :forward_destination
   validates :name, :presence => true
   validates :domain, :presence => true
-  validates :role, :inclusion => { :in => User::ROLES }
-  has_secure_password
+  validates :role, :inclusion => { :in => ROLES }
+  # Only validate forward_destination if present.
+  # TODO: allow multiple concatenated addresses.
+  validates :forward_destination, :presence => true,
+      :format => { :with => EMAIL_ADDR_REGEXP },
+      :if => Proc.new { |user| user.forward_destination.present? }
 
   def destroyable?
     ! self.postmaster?

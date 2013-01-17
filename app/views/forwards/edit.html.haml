@@ -1,5 +1,6 @@
 %h1 Editing forward #{@forward.name}@#{@domain.name}
 
+-# TODO: refactor with "new".
 = form_for([@domain, @forward]) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @forward }
   .field

@@ -9,7 +9,6 @@ class ForwardsController < ApplicationController
   end
 
   def show
-    @user = @forward.user
   end
 
   def edit
@@ -63,8 +62,7 @@ class ForwardsController < ApplicationController
 
     respond_to do |format|
       format.html {
-        redirect_to (f.user ? [f.domain, f.user] : f.domain),
-            notice: 'Forward was deleted.'
+        redirect_to f.domain, notice: 'Forward was deleted.'
       }
       format.json { head :no_content }
     end

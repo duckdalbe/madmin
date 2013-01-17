@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128195340) do
+ActiveRecord::Schema.define(:version => 20130117204836) do
 
   create_table "domains", :force => true do |t|
     t.string   "name"
@@ -33,9 +33,10 @@ ActiveRecord::Schema.define(:version => 20121128195340) do
     t.string   "name"
     t.string   "password_digest"
     t.integer  "domain_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "role"
+    t.string   "forward_destination"
   end
 
   add_index "users", ["domain_id"], :name => "index_users_on_domain_id"
