@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   belongs_to :domain
   has_secure_password
   attr_accessible :name, :password, :password_confirmation, :domain_id, :role, :forward_destination
-  validates :name, :presence => true
+  validates :name, :presence => true, :uniqueness => true
   validates :domain, :presence => true
   validates :role, :inclusion => { :in => ROLES }
   # Only validate forward_destination if present.
