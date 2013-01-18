@@ -1,7 +1,6 @@
 - if obj.errors.any?
   #error_explanation
-    %h2
-      .text-error #{pluralize(obj.errors.count, "error")} prohibited this #{obj.class} from being saved:
+    %strong.text-error #{pluralize(obj.errors.count, "error")} prohibited this #{obj.class} from being saved:
     %ul
       - obj.errors.full_messages.each do |msg|
         %li.text-error= msg

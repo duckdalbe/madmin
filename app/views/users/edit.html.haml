@@ -1,23 +1,5 @@
 %h1 Editing user #{@user.name}
 
-= form_for([@domain, @user]) do |f|
-  = render :partial => 'shared/form_errors', :locals => { :obj => @user }
-  -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
-  -# refactor with "new"
-  - if current_user.superadmin? && ! @user.postmaster?
-    .field
-      = f.label :role
-      = f.collection_select :role, User::ROLES, :to_s, :humanize
-  .field
-    = f.label :forward_destination
-    = f.text_field :forward_destination
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit
+= render 'form'
 
 = link_to 'Show', [@domain, @user]

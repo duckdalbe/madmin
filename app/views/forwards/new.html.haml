@@ -1,12 +1,3 @@
 %h1 New forward
 
-= form_for([@domain, @forward]) do |f|
-  = render :partial => 'shared/form_errors', :locals => { :obj => @forward }
-  .field
-    = f.label :name
-    #{f.text_field(:name)}@#{@domain.name}
-  .field
-    = f.label :destination
-    = f.text_field :destination
-  .actions
-    = f.submit
+= render 'form'

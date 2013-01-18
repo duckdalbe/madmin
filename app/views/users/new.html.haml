@@ -1,18 +1,3 @@
 %h1 New user
 
-= form_for([:domain, @user]) do |f|
-  = render :partial => 'shared/form_errors', :locals => { :obj => @user }
-  .field
-    = f.label :name
-    #{f.text_field(:name)}@#{@domain.name}
-  .field
-    = f.label :forward_destination
-    = f.text_field :forward_destination
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit
+= render 'form'

@@ -1,0 +1,8 @@
+$errorred: #B94A48;
+
+.field_with_errors {
+  color: $errorred;
+  input {
+    border: solid thin $errorred;
+  }
+}
