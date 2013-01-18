@@ -1,14 +1,12 @@
 = form_for([@domain, @forward], :html => { :class => 'form-horizontal' }) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @forward }
-  .control-group
-    = f.label :name, :class => 'control-label'
-    .controls
-      .input-append
-        - if @forward.created_at.blank?
+  - if @forward.created_at.blank?
+    .control-group
+      = f.label :name, :class => 'control-label'
+      .controls
+        .input-append
           #{f.text_field :name}
-        - else
-          #{f.text_field :name, :disabled => true}
-        %span.add-on @#{@domain.name}
+          %span.add-on @#{@domain.name}
   .control-group
     = f.label :destination, :class => 'control-label'
     .controls= f.text_field :destination
