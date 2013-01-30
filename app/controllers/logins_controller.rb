@@ -33,8 +33,15 @@ class LoginsController < ApplicationController
         redirect_to [domain, user]
       end
     else
-      flash[:notice] = 'Wrong credentials, please try again.'
-      redirect_to new_login_path
+      respond_to do |format|
+        format.html {
+          flash[:notice] = 'Wrong credentials, please try again.'
+          render :new, :status => 401
+        }
+        format.json {
+          head :unauthorized
+        }
+      end
     end
   end
 
