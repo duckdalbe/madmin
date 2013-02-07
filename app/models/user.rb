@@ -11,8 +11,22 @@ class User < ActiveRecord::Base
       :format => { :with => EMAIL_ADDR_REGEXP },
       :if => Proc.new { |user| user.forward_destination.present? }
 
+  def self.superadmins
+    where(role: 'superadmin')
+  end
+
+  def self.any_superadmins_left?(obj, field)
+    if superadmins.where("#{field} != #{obj.id}").blank?
+      obj.errors[:base] << 'Must not delete the last superadmin!'
+      false
+    else
+      true
+    end
+  end
+
   def destroyable?
-    ! self.postmaster?
+    # Postmaster-account may not be deleted other than with its domain.
+    ! self.postmaster? && self.class.any_superadmins_left?(self, :id)
   end
 
   def has_role?(role)
