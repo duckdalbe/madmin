@@ -28,9 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def superadmin?
-    # TODO: find a better algorithm which account to nail as superadmin.
-    (self.domain.id == Domain.first.id && self.postmaster?) ||
-        has_role?(:superadmin)
+    has_role?(:superadmin)
   end
 
   def self.find_by_email(email)
