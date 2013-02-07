@@ -41,15 +41,17 @@ class DomainsController < ApplicationController
   end
 
   def destroy
-    d = @domain.dup
-    @domain.destroy
-
     respond_to do |format|
-      format.html {
-        redirect_to domains_url,
-            notice: "Domain #{d.name} was successfully deleted."
-      }
-      format.json { head :no_content }
+      if @domain.destroy
+        format.html {
+          redirect_to domains_url,
+              notice: "Domain #{d.name} was successfully deleted."
+        }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @domain, alert: @domain.errors[:base] }
+        format.json { render json: @domain.errors[:base], status: :conflict }
+      end
     end
   end
 
