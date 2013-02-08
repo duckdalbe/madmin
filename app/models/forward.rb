@@ -1,7 +1,11 @@
 class Forward < ActiveRecord::Base
   belongs_to :domain
   attr_accessible :destination, :name, :domain_id
-  validates :name, uniqueness: { scope: :domain_id, message: 'is taken by user.' }
+  validates :name,
+            uniqueness: { scope: :domain_id },
+            exclusion: { in: lambda { |fw|
+                User.select(:name).where(domain_id: fw.domain_id).map(&:name) },
+                         message: 'is taken by user.' }
   validates :domain, presence: { message: 'does not exist' }
   validates :destination, presence: { format: { with: EMAIL_ADDR_REGEXP } }
 
