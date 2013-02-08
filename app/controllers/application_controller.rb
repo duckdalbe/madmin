@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate
+  before_filter :filter_params
   load_and_authorize_resource
   # ensure authorization is checked.
   check_authorization
@@ -45,6 +46,9 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+  end
+
+  def filter_params
   end
 
   def render403

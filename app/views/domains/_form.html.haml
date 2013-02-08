@@ -1,8 +1,22 @@
-= form_for @domain, :html => { :class => 'form-horizontal' } do |f|
+= form_for @domain, html: { class: 'form-horizontal' } do |f|
+  = render partial: 'shared/form_errors', locals: { obj: @domain } if @domain.present?
+  = render partial: 'shared/form_errors', locals: { obj: @user } if @user.present?
   .control-group
-    = f.label :name, :class => 'control-label'
+    = f.label :name, class: 'control-label' do
+      Domain name
     .controls
-      = f.text_field :name, :class => 'text_field'
+      = f.text_field :name, class: 'text_field'
+  .control-group
+    = f.fields_for :user do |ff|
+      .control-group
+        = ff.label :password, class: 'control-label' do
+          Postmaster password
+        .controls
+          = ff.password_field :password, class: 'text_field'
+      .control-group
+        = ff.label :password_confirmation, class: 'control-label'
+        .controls
+          = ff.password_field :password_confirmation, class: 'text_field'
   .form-actions
-    = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), domains_path, :class => 'btn'
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t('.cancel', default: t("helpers.links.cancel")), domains_path, class: 'btn'

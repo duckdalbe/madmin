@@ -24,10 +24,26 @@ class DomainsController < ApplicationController
     end
   end
 
+  def filter_params
+    if request['action'] == 'create'
+      @user_params = params['domain'].delete('user')
+    end
+  end
+
   def create
-    # TODO: create postmaster-account on the go.
+    if @domain.save
+      @user = User.new(@user_params)
+      @user.name = 'postmaster'
+      @user.role = 'admin'
+      @user.domain_id = @domain.id
+
+      if ! @user.save
+        @domain.delete
+      end
+    end
+
     respond_to do |format|
-      if @domain.save
+      if @domain.errors.blank? && @user.errors.blank?
         format.html {
           redirect_to @domain,
               notice: "Domain #{@domain.name} was successfully created."
@@ -45,7 +61,7 @@ class DomainsController < ApplicationController
       if @domain.destroy
         format.html {
           redirect_to domains_url,
-              notice: "Domain #{d.name} was successfully deleted."
+              notice: "Domain #{@domain.name} was successfully deleted."
         }
         format.json { head :no_content }
       else
