@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130117204836) do
+ActiveRecord::Schema.define(:version => 20130227222215) do
 
   create_table "domains", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20130117204836) do
     t.datetime "updated_at",          :null => false
     t.string   "role"
     t.string   "forward_destination"
+    t.string   "old_pwstring"
   end
 
   add_index "users", ["domain_id"], :name => "index_users_on_domain_id"
