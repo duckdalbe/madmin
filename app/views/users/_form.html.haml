@@ -1,6 +1,5 @@
 = form_for([@domain, @user], :html => { :class => 'form-horizontal' }) do |f|
   = render :partial => 'shared/form_errors', :locals => { :obj => @user }
-  -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
   - if @user.created_at.blank?
     .control-group
       = f.label :name, :class => 'control-label'
@@ -18,6 +17,8 @@
     = f.label :forward_destination, :class => 'control-label'
     .controls= f.text_field :forward_destination
   .control-group
+    -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
+    -# TODO: use cancan's roles for rights-checking.
     - if (current_user.superadmin? && ! @user.postmaster?)
       = f.label :role, :class => 'control-label'
       .controls= f.collection_select :role, ROLES, :to_s, :humanize

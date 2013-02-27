@@ -39,8 +39,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    # TODO: use dynamic attr_accessible, see
-    # <http://asciicasts.com/episodes/237-dynamic-attr-accessible>.
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html {
@@ -57,6 +55,7 @@ class UsersController < ApplicationController
 
   def destroy
     if ! @user.destroyable?
+      # TODO: respond to json.
       flash[:error] = 'Account may not be deleted.'
       redirect_to :back
       return false

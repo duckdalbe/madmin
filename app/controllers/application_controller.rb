@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate
+  # TODO: use strong_parameters: <http://weblog.rubyonrails.org/2012/3/21/strong-parameters/>.
   before_filter :filter_params
   load_and_authorize_resource
   # ensure authorization is checked.
