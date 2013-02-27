@@ -28,6 +28,12 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
+    # TODO: check if bcrypt-pw is set, else authenticate against old password
+    # (old_pwstring), and if successful set bcrypt-pw and set old_pwstring to NULL.
+    # Checking md5-hashed, salted, crypt()-compatible old_pwstring:
+    #   pwstring = User.find_by_name(user).old_pwstring
+    #   salt = pwstring.slice(0,12)
+    #   password.crypt(salt) == pwstring
     respond_to do |format|
       format.html do
         if !current_user
