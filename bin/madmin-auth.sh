@@ -9,16 +9,12 @@ if [ $# -ne 2 ]; then
   exit 1
 fi
 
-urlescape() {
-  echo $(perl -MURI::Escape -e "print uri_escape('$1')")
-}
-name=$(urlescape "${1%@*}")
-domain=$(urlescape "${1#*@}")
-pass=$(urlescape "$2")
+name="${1%@*}"
+domain="${1#*@}"
+pass="$2"
+url="$protocol://$host:$port/login.json"
 
-# TODO: url-encode params
-url="$protocol://$host:$port/login.json?name=$name&domain=$domain&password=$pass"
-status=$(curl -I -s -S $url | grep ^HTTP | tail -n 1 | awk '{print $2}')
+status=$(curl -i -s -S --data-urlencode "name=$name" --data-urlencode "domain=$domain" --data-urlencode "password=$pass" $url | awk '/^HTTP/ {print $2}')
 
 case $status in 
   3*|2*)
