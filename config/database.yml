@@ -19,7 +19,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: madmin
+  host: 127.0.0.1
+  username: madmin
+  password: SomeThinK-Rndm00@
   pool: 5
   timeout: 5000
