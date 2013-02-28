@@ -4,18 +4,32 @@ A simple mail administration-interface for web and command-line.
 
 This is work in progress and not yet production-ready.
 
-To get started:
+To get started (development):
+
+1. Install bundler if you haven't already: `gem install bundler`.
+2. Install nodejs or un-comment 'therubyracer' in 'Gemfile'.
+3. Install dependencies of madmin via bundler: `bundle install`.
+4. Review/change 'config/database.yml' if you wish.
+5. Setup database: `bundle exec rake db:setup`.
+6. Change the secret in 'config/initializers/secret_token.rb'.
+7. Start the server: `bundle exec rails server`.
+8. Point your browser to <http://localhost:3000/>, login as
+   'postmaster@example.org' using the password 'morepasta!'.
+9. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
+   for now, please).
+
+To run continously (production):
 
 1. Install bundler if you haven't already: `gem install bundler`.
 2. Install dependencies of madmin via bundler: `bundle install`.
-3. Review/change config/database.yml if you wish.
-4. Setup database: `bundle exec rake db:setup`.
-5. Change the secret in config/initializers/secret_token.rb
-6. Start the server: `bundle exec rails server`.
-7. Point your browser to <http://localhost:3000/>, login as
-   'postmaster@example.org' using the password 'morepasta!'.
-8. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
-   for now, please).
+3. In 'config/database.yml' change the 'production'-section.
+4. Setup database: `RAILS_ENV=production bundle exec rake db:setup`.
+5. Change the secret in 'config/initializers/secret_token.rb'.
+6. Configure the httpd (e.g. Apache, nginx, ...) to serve madmin, e.g. with
+   Pushion Passenger ("mod_rails").
+7. Point your browser to <http://$yourhost/>, login as 'postmaster@example.org'
+   using the password 'morepasta!', create your domains and users, then delete
+   domain 'example.org'.
 
 
 === TODO
