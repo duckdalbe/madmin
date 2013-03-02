@@ -66,4 +66,26 @@ class User < ActiveRecord::Base
   def email
     [self.name, self.domain.name].join '@'
   end
+
+  def authenticate(input)
+    if password_digest.blank?
+      logger.info "BCrypt-attribute is blank, attempting authentication against legacy password"
+      if authenticate_oldpw(input)
+        logger.info "Saving password into BCrypt-attribute."
+        self.password = input
+        self.save!
+        self
+      else
+        false
+      end
+    else
+      super(input)
+    end
+  end
+
+  def authenticate_oldpw(input)
+    # split() + join() is way faster than match() or scan()
+    salt = old_pwstring.split('$')[0..-2].join('$')
+    old_pwstring == input.crypt(salt)
+  end
 end
