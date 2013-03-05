@@ -34,13 +34,8 @@ To run continously (production):
 
 === TODO
 
-* Implement/fix bin/*
-  * Maybe implement madmin-auth.rb to authenticate directly against the DB to
-    make it faster.
-* Test if using Devise would save effort.
-* How to handle the situation in which a (super)admin creates a forward with a
-  name that's already used for a user. Should be prohibited unless the user's
-  ok with that. How?
+* Test/benchmark bin/*
+* Research if using Devise would save effort.
 * Fail authentication if any two of (hash(user-agent), hash(username), ip)
   appeared in more than two failed login-attempts within the last hour. (Model
   FailedLogin that gets a new record on every failed login attempt.)
