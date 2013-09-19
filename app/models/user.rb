@@ -84,8 +84,12 @@ class User < ActiveRecord::Base
   end
 
   def authenticate_oldpw(input)
-    # split() + join() is way faster than match() or scan()
-    salt = old_pwstring.split('$')[0..-2].join('$')
+    salt = if old_pwstring.first == '$'
+             # split() + join() is way faster than match() or scan()
+             old_pwstring.split('$')[0..-2].join('$')
+           else
+             old_pwstring[0..1]
+           end
     old_pwstring == input.crypt(salt)
   end
 end
