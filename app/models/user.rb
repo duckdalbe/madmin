@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     has_role?(:superadmin)
   end
 
+  def to_s
+    email
+  end
+
   def self.find_by_email(email)
     name, domain_name = email.split('@')
     domain = Domain.find_by_name(domain_name)

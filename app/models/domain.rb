@@ -23,4 +23,8 @@ class Domain < ActiveRecord::Base
       :forwards => self.forwards
     }
   end
+  
+  def to_s
+    name
+  end
 end
