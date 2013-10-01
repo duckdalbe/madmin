@@ -4,6 +4,12 @@ class Domain < ActiveRecord::Base
   has_many :users,  :order => :name, :dependent => :destroy
   has_many :forwards, :order => :name, :dependent => :destroy
   before_destroy :destroyable?
+  after_destroy :delete_domain_data
+
+  def delete_domain_data
+    logger.info "Deleting domain-data for #{self}:"
+    logger.info `#{Rails.root}/bin/delete-mail-data.sh '#{domain.name}'`.chomp
+  end
 
   def destroyable?
     User.any_superadmins_left?(self, :domain_id)

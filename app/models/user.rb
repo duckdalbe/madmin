@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
       :format => { :with => EMAIL_ADDR_REGEXP },
       :if => Proc.new { |user| user.forward_destination.present? }
 
+  after_destroy :delete_user_data
+
   def self.superadmins
     where(role: 'superadmin')
   end
@@ -22,6 +24,11 @@ class User < ActiveRecord::Base
     else
       true
     end
+  end
+
+  def delete_user_data
+    logger.info "Deleting user-data for #{self}:"
+    logger.info `#{Rails.root}/bin/delete-mail-data.sh '#{domain.name}' '#{name}'`.chomp
   end
 
   def destroyable?
