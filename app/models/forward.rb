@@ -9,6 +9,8 @@ class Forward < ActiveRecord::Base
   validates :domain, presence: { message: 'does not exist' }
   validates :destination, presence: { format: { with: EMAIL_ADDR_REGEXP } }
 
+  default_scope order(:name)
+
   def as_json(options={})
     {
       :name => self.name,

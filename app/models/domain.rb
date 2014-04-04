@@ -6,6 +6,8 @@ class Domain < ActiveRecord::Base
   before_destroy :destroyable?
   after_destroy :delete_domain_data
 
+  default_scope order(:name)
+
   def delete_domain_data
     logger.info "Deleting domain-data for #{self}:"
     logger.info `#{Rails.root}/bin/delete-mail-data.sh '#{domain.name}'`.chomp

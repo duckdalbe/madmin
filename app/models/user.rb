@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
       :format => { :with => EMAIL_ADDR_REGEXP },
       :if => Proc.new { |user| user.forward_destination.present? }
 
+  default_scope order(:name)
+
   after_destroy :delete_user_data
 
   def self.superadmins
