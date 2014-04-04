@@ -27,13 +27,21 @@ class ApplicationController < ActionController::Base
     @_current_user = user
   end
 
+  def update_session_expiry
+    if current_user
+      session[:login_expires_at] = 30.minutes.from_now
+    end
+  end
+
   def authenticate
+    logger.info "session: #{session.inspect}"
     respond_to do |format|
       format.html do
-        if !current_user
+        if current_user && session[:login_expires_at].kind_of?(Time) && session[:login_expires_at] > Time.now
+          update_session_expiry
+        else
           session[:return_to] = request.fullpath
-          flash[:notice] = "Please log in!"
-          redirect_to new_login_url
+          log_out "Please log in!"
         end
       end
       format.json do
@@ -47,6 +55,14 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+  rescue => e
+    logger.error "Error: #{e}"
+    log_out "Error.", :error
+  end
+
+  def log_out(msg, msg_type=:notice)
+    current_user = session[:current_user_id] = nil
+    redirect_to new_login_url, notice: msg
   end
 
   def filter_params

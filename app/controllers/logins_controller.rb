@@ -26,6 +26,7 @@ class LoginsController < ApplicationController
     user = User.where(:name => params[:name], :domain_id => domain.try(:id)).first
     if user.try(:authenticate, params[:password])
       session[:current_user_id] = user.id
+      update_session_expiry
       if session[:return_to].present?
         redirect_to session[:return_to]
         session[:return_to] = nil
@@ -47,9 +48,7 @@ class LoginsController < ApplicationController
 
   # login
   def destroy
-    @_current_user = session[:current_user_id] = nil
-    flash[:notice] = "Logout successful. Have a nice day!"
-    redirect_to new_login_path
+    log_out "Logout successful. Have a nice day!"
   end
 
   private
