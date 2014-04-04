@@ -1,7 +1,9 @@
 class Forward < ActiveRecord::Base
   belongs_to :domain
   attr_accessible :destination, :name, :domain_id
+  # TODO: validate that the name only contains valid characters.
   validates :name,
+            presence: true,
             uniqueness: { scope: :domain_id },
             exclusion: { in: lambda { |fw|
                 User.select(:name).where(domain_id: fw.domain_id).map(&:name) },
