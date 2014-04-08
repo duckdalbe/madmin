@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
         :id => self.domain.id,
         :name => self.domain.name
         },
-      :forwards => self.forwards
+      :forward_destination => self.forward_destination
     }
   end
 
