@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227222215) do
+ActiveRecord::Schema.define(:version => 20140408185134) do
 
   create_table "domains", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "dyndns_hostnames", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "dyndns_hostnames", ["user_id"], :name => "index_dyndns_hostnames_on_user_id"
 
   create_table "forwards", :force => true do |t|
     t.string   "name"

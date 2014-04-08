@@ -1,0 +1,7 @@
+%h1 Are you sure you want to delete the hostname '#{@dyndns_hostname.name}'?
+
+= form_for([@domain, @user, @dyndns_hostname], :html => { :method => :delete }) do |f|
+  = submit_tag t("destroy"), :class => 'btn btn-danger'
+  = link_to :cancel, [@domain, @user, @dyndns_hostname]
+
+

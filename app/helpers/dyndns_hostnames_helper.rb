@@ -1,0 +1,2 @@
+module DyndnsHostnamesHelper
+end

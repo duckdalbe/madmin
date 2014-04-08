@@ -1,0 +1,6 @@
+= form_for([@domain, @user, @dyndns_hostname], :html => { :class => 'form-horizontal' }) do |f|
+  = render :partial => 'shared/form_errors', :locals => { :obj => @dyndns_hostname }
+  = f.label :name, :class => 'control-label'
+  .control-group
+    .controls= f.text_field(:name)
+  .actions= f.submit

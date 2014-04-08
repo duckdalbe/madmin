@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  belongs_to :domain
   has_secure_password
+  belongs_to :domain
+  has_many :dyndns_hostnames, order: :name, dependent: :destroy
   attr_accessible :name, :password, :password_confirmation, :domain_id, :role, :forward_destination
   validates :name, :presence => true, :uniqueness => { :scope => :domain_id }
   validates :domain, :presence => true
@@ -72,7 +73,8 @@ class User < ActiveRecord::Base
         :id => self.domain.id,
         :name => self.domain.name
         },
-      :forward_destination => self.forward_destination
+      :forward_destination => self.forward_destination,
+      dyndns_hostnames: self.dyndns_hostnames.map(&:name)
     }
   end
 

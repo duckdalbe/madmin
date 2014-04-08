@@ -19,6 +19,11 @@ Madmin::Application.routes.draw do
       member do
         get 'confirm_destroy'
       end
+      resources :dyndns_hostnames do
+        member do
+          get 'confirm_destroy'
+        end
+      end
     end
   end
 

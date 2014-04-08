@@ -14,7 +14,20 @@
     - if @user.forward_destination.present?
       %li.text-info Email is <strong>not</strong> stored but forwarded to #{@user.forward_destination}.
 
-  - if @user.destroyable?
-    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_user_path(@domain, @user), :class => 'btn btn-danger'
   = link_to 'Edit', edit_domain_user_path(@domain, @user), :class => 'btn'
+
+.well#dyndns_hostnames
+  %h4 Dyndns Hostnames
+  - if @user.dyndns_hostnames.blank?
+    = t :none
+  %ul
+    - @user.dyndns_hostnames.each do |hostname|
+      %li
+        = hostname.name
+        = link_to t('.edit'), edit_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small'
+        = link_to t('.destroy'), confirm_destroy_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small btn-danger'
+  = link_to t('.dyndns_hostnames.new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
+
+- if @user.destroyable?
+  .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_user_path(@domain, @user), :class => 'btn btn-danger'
 

@@ -34,7 +34,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    logger.info "session: #{session.inspect}"
     respond_to do |format|
       format.html do
         if current_user && session[:login_expires_at].kind_of?(Time) && session[:login_expires_at] > Time.now
