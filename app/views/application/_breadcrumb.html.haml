@@ -1,11 +1,2 @@
 - if current_user.present?
-  %ul.breadcrumb
-    - if can? :read, @domain
-      %span.divider »
-      %li#domains= link_to_unless_current 'Domains', domains_path
-      - if @domain.present?
-        %span.divider »
-        %li#domain= link_to_unless_current @domain.name, @domain
-    - if @user.try(:id)
-      %span.divider »
-      %li#user= link_to_unless_current @user.email, [@domain, @user]
+  %ul.breadcrumb= make_breadcrumb
