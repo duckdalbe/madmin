@@ -2,12 +2,8 @@
   %h1= @domain.name
 
 .well
-  %ul
-    %li #{Domain.human_attribute_name(:created_at)}: #{l @domain.created_at}.
-    %li #{Domain.human_attribute_name(:updated_at)}: #{l @domain.updated_at}.
-    .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_path(@domain), :class => 'btn btn-danger'
-    .clearfix
-
+  %h3 Admins
+  %ul= render @domain.admins
 
 .well
   %h3 Users
@@ -20,3 +16,11 @@
   %ul= render @domain.forwards
 
   = link_to t('.forwards.new', :default => t("helpers.links.new")), new_domain_forward_path(@domain), :class => 'btn btn-primary'
+
+.well
+  %h3 Meta
+  %ul
+    %li #{Domain.human_attribute_name(:created_at)}: #{l @domain.created_at}.
+    %li #{Domain.human_attribute_name(:updated_at)}: #{l @domain.updated_at}.
+
+.pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_path(@domain), :class => 'btn btn-danger'

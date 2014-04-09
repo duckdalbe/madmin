@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
-  load_resource :domain
+  load_resource :domain, except: :myself
+
+  def myself
+    respond_to do |format|
+      format.html { redirect_to [current_user.domain, current_user] }
+      format.json { render json: current_user }
+    end
+  end
 
   def confirm_destroy
   end

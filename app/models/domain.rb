@@ -8,6 +8,10 @@ class Domain < ActiveRecord::Base
 
   default_scope order(:name)
 
+  def admins
+    users.where(role: 'admin')
+  end
+
   def delete_domain_data
     logger.info "Deleting domain-data for #{self}:"
     logger.info `#{Rails.root}/bin/delete-mail-data.sh '#{domain.name}'`.chomp

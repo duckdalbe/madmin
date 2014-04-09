@@ -4,6 +4,7 @@ Madmin::Application.routes.draw do
   match '/login/cookiesrequired' => 'logins#cookiesrequired', :as => :cookiesrequired_login
   match '/login' => 'logins#create', :as => :create_login
   match '/logout' => 'logins#destroy', :as => :destroy_login
+  match '/myself' => 'users#myself', :as => :myself
 
 
   resources :domains do

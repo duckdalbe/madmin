@@ -18,8 +18,6 @@
 
 .well#dyndns_hostnames
   %h4 Dyndns Hostnames
-  - if @user.dyndns_hostnames.blank?
-    = t :none
   %ul
     - @user.dyndns_hostnames.each do |hostname|
       %li
