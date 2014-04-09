@@ -1,6 +1,6 @@
 .page-header
   %h1 Domains
 
-%ul= render @domains
+.pull-right= link_to t('.new', :default => t("helpers.links.new")), new_domain_path, :class => 'btn btn-primary'
 
-= link_to t('.new', :default => t("helpers.links.new")), new_domain_path, :class => 'btn btn-primary'
+%ul= render @domains
