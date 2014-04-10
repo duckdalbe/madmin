@@ -1,4 +1,31 @@
 de:
-  hello: Hallo!
   destroy: Löschen
   cancel: Abbrechen
+  edit: Bearbeiten
+  log_in: Bitte einloggen.
+  login: Einloggen
+  logout: Ausloggen
+  new: Neu
+  save: Speichern
+  password: Passwort
+  password_confirmation: Passwortwiederholung
+  more_users: Weitere Konten ⇒
+  latest_users: Neueste Konten
+  users: Konten
+  more_forwards: Weitere Weiterleitungen ⇒
+  latest_forwards: Neueste Weiterleitungen
+  forwards: Weiterleitungen
+  created_at: Angelegt
+  updated_at: Aktualisiert
+  role: Rolle
+  forward_destination: Weiterleitungsziel
+  edit_name: Bearbeite %{name}
+  new_user: Neues Konto
+  new_hostname: Neuer Dyndns-Hostname
+  time:
+    formats:
+      default: "%d.%m.%Y, %H:%M Uhr"
+      short: "%d.%m., %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+      date: "%d.%m.%Y"

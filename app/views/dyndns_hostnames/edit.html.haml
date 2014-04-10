@@ -1,5 +1,4 @@
-%h1 Editing dyndns hostname #{@dyndns_hostname.name}
+.page-header
+  %h1= t('edit_name', name: @dyndns_hostname.name)
 
 = render 'form'
-
-= link_to t(:cancel), [@domain, @user], :anchor => '#dyndns_hostnames'

@@ -11,7 +11,7 @@
     %li #{User.human_attribute_name(:created_at)}: #{l @user.created_at}.
     %li #{User.human_attribute_name(:updated_at)}: #{l @user.updated_at}.
     %li
-      #{User.human_attribute_name(:role)}:
+      #{t(:role)}:
       - if @user.postmaster?
         = @user.superadmin? ? 'Superadmin' : 'Admin'
       - else
@@ -23,7 +23,7 @@
 
 .well#dyndns_hostnames
   %h4 Dyndns Hostnames
-  .pull-right= link_to t('.dyndns_hostnames.new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
+  .pull-right= link_to t('new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
 
   %ul
     - @user.dyndns_hostnames.each do |hostname|

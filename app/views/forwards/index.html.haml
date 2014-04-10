@@ -1,12 +1,14 @@
 .page-header
-  %h1 Forwards @#{@domain}
-
-= render 'shared/initials_filter'
+  %h1
+    - if @filter_initial.present?
+      #{@filter_initial}&hellip;
+    - else
+      #{t(:latest_forwards)}
+    @#{@domain}
+  = render 'shared/initials_filter'
 
 .pull-right= link_to t('.new'), new_domain_forward_path(@domain), :class => 'btn btn-primary'
 
-- if @filter_initial.blank?
-  %h4 Latest forwards
 
 %ul= render @forwards
 

@@ -1,11 +1,12 @@
 .page-header
-  %h1 Users @#{@domain}
-
-= render 'shared/initials_filter'
+  %h1
+    - if @filter_initial.present?
+      #{@filter_initial}&hellip;
+    - else
+      #{t(:latest_users)}
+    @#{@domain}
+  = render 'shared/initials_filter'
 
 .pull-right= link_to t('.users.new'), new_domain_user_path(@domain), :class => 'btn btn-primary'
-
-- if @filter_initial.blank?
-  %h4 Latest users
 
 %ul= render @users

@@ -1,7 +1,31 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
   destroy: Destroy
   cancel: Cancel
+  edit: Edit
+  log_in: Login, please.
+  login: Login
+  logout: Logout
+  new: New
+  save: Save
+  password: Password
+  password_confirmation: Password confirmation
+  more_users: More Users ⇒
+  latest_users: Latest Users
+  users: Users
+  more_forwards: More Forwards ⇒
+  latest_forwards: Latest Forwards
+  forwards: Forwards
+  created_at: Created at
+  updated_at: Updated at
+  role: Role
+  forward_destination: Forward destination
+  edit_name: Editing %{name}
+  new_user: New Account
+  new_hostname: New Dyndns Hostname
+  time:
+    formats:
+      default: "%d %B %Y, %H:%M"
+      short: "%d %B, %H:%M"
+      long: "%A, %d %B %Y, %H:%M"
+      time: "%H:%M"
+      date: "%Y-%m-%d"

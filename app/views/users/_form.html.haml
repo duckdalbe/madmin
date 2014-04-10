@@ -14,7 +14,7 @@
     = f.label :password_confirmation, :class => 'control-label'
     .controls= f.password_field :password_confirmation
   .control-group
-    = f.label :forward_destination, :class => 'control-label'
+    = f.label t(:forward_destination), :class => 'control-label'
     .controls= f.text_field :forward_destination
   .control-group
     -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
@@ -23,5 +23,5 @@
       = f.label :role, :class => 'control-label'
       .controls= f.collection_select :role, ROLES, :to_s, :humanize
   .form-actions
-    = f.submit nil, class: 'btn btn-primary'
+    = f.submit t(:save), class: 'btn btn-primary'
     = link_to t(:cancel), [@domain, @user], class: 'btn'

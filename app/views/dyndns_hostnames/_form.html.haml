@@ -3,4 +3,6 @@
   = f.label :name, :class => 'control-label'
   .control-group
     .controls= f.text_field(:name)
-  .actions= f.submit
+  .form-actions
+    = f.submit t(:save), class: 'btn btn-primary'
+    = link_to t(:cancel), [@domain, @user, @dyndns_hostname], class: 'btn'
