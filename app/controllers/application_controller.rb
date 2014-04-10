@@ -77,4 +77,27 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def filtered_index
+    resource_klass = self.class.controller_name.classify.constantize
+    @initials = resource_klass.select(:name).map do |obj|
+      obj.name.first.upcase
+    end.uniq.compact
+    @filter_initial = params[:filter].to_s.upcase
+
+    # Assign the list to the right variable, e.g. @forwards.
+    objs = if @filter_initial.present? && @initials.include?(@filter_initial)
+             resource_klass.where("name like '#{@filter_initial}%'")
+           else
+             resource_klass.latest
+           end
+    inst_var_name = "@#{resource_klass.to_s.downcase.pluralize}"
+    instance_variable_set(inst_var_name, objs)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: instance_variable_get(inst_var_name) }
+    end
+  end
+
 end

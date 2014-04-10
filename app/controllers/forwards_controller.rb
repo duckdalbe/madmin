@@ -1,6 +1,11 @@
 class ForwardsController < ApplicationController
   load_resource :domain
 
+  def index
+    filtered_index
+  end
+
+
   def new
     respond_to do |format|
       format.html # new.html.erb

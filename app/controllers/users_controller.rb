@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    filtered_index
+  end
+
   def confirm_destroy
   end
 

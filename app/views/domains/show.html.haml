@@ -6,16 +6,23 @@
   %ul= render @domain.admins
 
 .well
-  %h3 Users
-  %ul= render @domain.users
+  %h3 Latest Users
+  .pull-right= link_to t('.users.new', :default => t("helpers.links.new")), new_domain_user_path(@domain), :class => 'btn btn-primary'
 
-  = link_to t('.users.new', :default => t("helpers.links.new")), new_domain_user_path(@domain), :class => 'btn btn-primary'
+  - if (users = @domain.users.latest).present?
+    %ul= render users
+    = link_to t('show all users'), domain_users_path(@domain)
+  .clearfix
+
 
 .well
-  %h3 Forwards
-  %ul= render @domain.forwards
+  %h3 Latest Forwards
+  .pull-right= link_to t('.forwards.new', :default => t("helpers.links.new")), new_domain_forward_path(@domain), :class => 'btn btn-primary'
 
-  = link_to t('.forwards.new', :default => t("helpers.links.new")), new_domain_forward_path(@domain), :class => 'btn btn-primary'
+  - if (forwards = @domain.forwards.latest).present?
+    %ul= render forwards
+    = link_to t('show all forwards'), domain_forwards_path(@domain)
+  .clearfix
 
 .well
   %h3 Meta

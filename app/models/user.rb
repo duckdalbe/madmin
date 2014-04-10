@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   default_scope order(:name)
 
+  scope :latest, order(:created_at).limit(20)
+
   after_destroy :delete_user_data
 
   def self.superadmins

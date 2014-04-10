@@ -13,6 +13,8 @@ class Forward < ActiveRecord::Base
 
   default_scope order(:name)
 
+  scope :latest, order(:created_at).limit(20)
+
   def as_json(options={})
     {
       :name => self.name,

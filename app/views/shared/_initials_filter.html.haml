@@ -1,0 +1,13 @@
+.breadcrumb
+  %span.text-info Filter:
+  - @initials.each do |initial|
+    - if @filter_initial == initial
+      .btn.btn-default.btn-small= initial
+    - else
+      = link_to initial, {filter: initial}, class: 'btn btn-info btn-small'
+  .pull-right
+    - if @filter_initial.present?
+      %button.close= link_to '&times;'.html_safe, {filter: nil}
+    - else
+      %button.close &times;
+
