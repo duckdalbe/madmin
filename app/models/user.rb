@@ -3,7 +3,11 @@ class User < ActiveRecord::Base
   belongs_to :domain
   has_many :dyndns_hostnames, order: :name, dependent: :destroy
   attr_accessible :name, :password, :password_confirmation, :domain_id, :role, :forward_destination
-  validates :name, :presence => true, :uniqueness => { :scope => :domain_id }
+  validates :name, 
+            presence: { format: { with: EMAIL_LOCALPART_REGEXP } },
+            uniqueness: { scope: :domain_id },
+            exclusion: { in: lambda { |u| Domain.forwards_names(u.domain_id) },
+                         message: 'is taken by forward.' }
   validates :domain, :presence => true
   validates :role, :inclusion => { :in => ROLES }
   # Only validate forward_destination if present.

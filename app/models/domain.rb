@@ -8,6 +8,14 @@ class Domain < ActiveRecord::Base
 
   default_scope order(:name)
 
+  def self.users_names(domain_id)
+    resource_names(User, domain_id)
+  end
+
+  def self.forwards_names(domain_id)
+    resource_names(Forward, domain_id)
+  end
+
   def admins
     users.where(role: 'admin')
   end
@@ -32,5 +40,11 @@ class Domain < ActiveRecord::Base
   
   def to_s
     name
+  end
+
+  private
+
+  def self.resource_names(klass, domain_id)
+    klass.select(:name).where(domain_id: domain_id).map(&:name)
   end
 end
