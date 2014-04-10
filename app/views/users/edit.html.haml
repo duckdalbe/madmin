@@ -1,5 +1,4 @@
-%h1 Editing user #{@user.name}
+.page-header
+  %h1 Editing user #{@user.name}
 
 = render 'form'
-
-= link_to t(:cancel), [@domain, @user]

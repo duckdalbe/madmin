@@ -2,11 +2,21 @@
   %h1= @domain.name
 
 .well
-  %h3 Admins
+  %h4 Meta
+  .pull-right
+    = link_to 'Edit', edit_domain_path(@domain), :class => 'btn'
+    - if @domain.destroyable?
+      = link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_path(@domain), :class => 'btn btn-danger'
+  %ul
+    %li #{Domain.human_attribute_name(:created_at)}: #{l @domain.created_at}.
+    %li #{Domain.human_attribute_name(:updated_at)}: #{l @domain.updated_at}.
+
+.well
+  %h4 Admins
   %ul= render @domain.admins
 
 .well
-  %h3 Latest Users
+  %h4 Latest Users
   .pull-right= link_to t('.users.new', :default => t("helpers.links.new")), new_domain_user_path(@domain), :class => 'btn btn-primary'
 
   - if (users = @domain.users.latest).present?
@@ -16,7 +26,7 @@
 
 
 .well
-  %h3 Latest Forwards
+  %h4 Latest Forwards
   .pull-right= link_to t('.forwards.new', :default => t("helpers.links.new")), new_domain_forward_path(@domain), :class => 'btn btn-primary'
 
   - if (forwards = @domain.forwards.latest).present?
@@ -24,10 +34,3 @@
     = link_to t('show all forwards'), domain_forwards_path(@domain)
   .clearfix
 
-.well
-  %h3 Meta
-  %ul
-    %li #{Domain.human_attribute_name(:created_at)}: #{l @domain.created_at}.
-    %li #{Domain.human_attribute_name(:updated_at)}: #{l @domain.updated_at}.
-
-.pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_path(@domain), :class => 'btn btn-danger'

@@ -10,5 +10,6 @@
   .control-group
     = f.label :destination, :class => 'control-label'
     .controls= f.text_field :destination
-  .actions
-    = f.submit
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t(:cancel), [@domain, @forward], class: 'btn'

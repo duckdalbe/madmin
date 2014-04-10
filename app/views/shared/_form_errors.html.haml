@@ -1,6 +1,6 @@
 - if obj.errors.any?
-  #error_explanation
-    %strong.text-error #{pluralize(obj.errors.count, "error")} prohibited this #{obj.class} from being saved:
+  .alert.alert-error
+    %strong #{pluralize(obj.errors.count, "error")} prohibited this form from being saved:
     %ul
       - obj.errors.full_messages.each do |msg|
         %li.text-error= msg

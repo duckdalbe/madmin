@@ -22,5 +22,6 @@
     - if (current_user.superadmin? && ! @user.postmaster?)
       = f.label :role, :class => 'control-label'
       .controls= f.collection_select :role, ROLES, :to_s, :humanize
-  .actions
-    = f.submit
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'
+    = link_to t(:cancel), [@domain, @user], class: 'btn'
