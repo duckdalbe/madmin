@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 
   def log_out(msg, msg_type=:notice)
     current_user = session[:current_user_id] = nil
-    redirect_to new_login_url, notice: msg
+    redirect_to new_login_url, msg_type => msg
   end
 
   def filter_params

@@ -36,7 +36,7 @@ class LoginsController < ApplicationController
     else
       respond_to do |format|
         format.html {
-          flash[:notice] = 'Wrong credentials, please try again.'
+          flash[:alert] = 'Wrong username or password, please try again.'
           render :new, :status => 401
         }
         format.json {
