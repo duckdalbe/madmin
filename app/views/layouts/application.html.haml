@@ -14,10 +14,5 @@
       .row
         = render 'breadcrumb'
         .span10
-          - if flash[:notice].present?
-            .alert.alert-info= flash[:notice]
-          - if flash[:alert].present?
-            .alert.alert-error
-              - flash[:alert].each do |msg|
-                Error: #{msg}
+          = render 'flashes'
           = yield
