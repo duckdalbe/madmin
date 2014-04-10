@@ -2,11 +2,9 @@
 
 A simple mail administration-interface for web and command-line.
 
-This is work in progress and not yet production-ready.
-
 To get started (development):
 
-1. Install bundler if you haven't already: `gem install bundler`.
+1. Install bundler: `gem install bundler`.
 2. Install nodejs or un-comment 'therubyracer' in 'Gemfile'.
 3. Install dependencies of madmin via bundler: `bundle install`.
 4. Review/change 'config/database.yml' if you wish.
@@ -15,12 +13,12 @@ To get started (development):
 7. Start the server: `bundle exec rails server`.
 8. Point your browser to <http://localhost:3000/>, login as
    'postmaster@example.org' using the password 'morepasta!'.
-9. Test, hack, break, report bugs (via <https://github.com/duckdalbe/madmin/>
-   for now, please).
+9. Test, hack, break, report bugs (via 
+   <https://github.com/duckdalbe/madmin/>, please).
 
 To run continously (production):
 
-1. Install bundler if you haven't already: `gem install bundler`.
+1. Install bundler: `gem install bundler`.
 2. Install dependencies of madmin via bundler: `bundle install`.
 3. In 'config/database.yml' change the 'production'-section.
 4. Setup database: `RAILS_ENV=production bundle exec rake db:setup`.
@@ -39,7 +37,8 @@ To run continously (production):
 * Fail authentication if any two of (hash(user-agent), hash(username), ip)
   appeared in more than two failed login-attempts within the last hour. (Model
   FailedLogin that gets a new record on every failed login attempt.)
-
+* Mass-create and group schleuder-aliases.
+* Integrate un/subscription to mailman-list (via mail?).
 
 Also see `rake notes`.
 
