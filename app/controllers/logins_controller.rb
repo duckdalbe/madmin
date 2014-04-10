@@ -22,8 +22,9 @@ class LoginsController < ApplicationController
 
   # login
   def create
-    domain = Domain.find_by_name(params[:domain])
-    user = User.where(:name => params[:name], :domain_id => domain.try(:id)).first
+    name, domain = params[:email].to_s.split('@')
+    domain = Domain.find_by_name(domain)
+    user = User.where(:name => name, :domain_id => domain.try(:id)).first
     if user.try(:authenticate, params[:password])
       session[:current_user_id] = user.id
       update_session_expiry
