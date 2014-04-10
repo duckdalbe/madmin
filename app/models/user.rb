@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates :forward_destination, :presence => true,
       :format => { :with => EMAIL_ADDR_REGEXP },
       :if => Proc.new { |user| user.forward_destination.present? }
+  before_destroy :destroyable?
 
   default_scope order(:name)
 
@@ -42,7 +43,13 @@ class User < ActiveRecord::Base
 
   def destroyable?
     # Postmaster-account may not be deleted other than with its domain.
-    ! self.postmaster? && self.class.any_superadmins_left?(self, :id)
+    if self.postmaster?
+      self.errors[:base] << 'Must not delete postmaster of domain!'
+      ret = false
+    else
+      ret = true
+    end
+    ret && self.class.any_superadmins_left?(self, :id)
   end
 
   def has_role?(role)

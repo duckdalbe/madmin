@@ -65,19 +65,17 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if ! @user.destroyable?
-      # TODO: respond to json.
-      flash[:error] = 'Account may not be deleted.'
-      redirect_to :back
-      return false
-    end
-
-    domain = @user.domain
-    @user.destroy
-
     respond_to do |format|
-      format.html { redirect_to domain }
-      format.json { head :no_content }
+      domain = @user.domain
+      if @user.destroy
+        format.html { redirect_to [domain, 'users'] }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to [domain, @user], alert: @user.errors[:base] }
+        format.json do
+          render json: @user.errors[:base], status: :unprocessable_entity
+        end
+      end
     end
   end
 

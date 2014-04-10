@@ -6,7 +6,7 @@
   .pull-right
     = link_to 'Edit', edit_domain_user_path(@domain, @user), :class => 'btn'
     - if @user.destroyable?
-      = link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_user_path(@domain, @user), :class => 'btn btn-danger'
+      = link_to t('destroy'), confirm_destroy_domain_user_path(@domain, @user), :class => 'btn btn-danger'
   %ul
     %li #{User.human_attribute_name(:created_at)}: #{l @user.created_at}.
     %li #{User.human_attribute_name(:updated_at)}: #{l @user.updated_at}.
