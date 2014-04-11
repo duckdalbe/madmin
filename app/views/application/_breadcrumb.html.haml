@@ -1,2 +1,2 @@
-- if current_user.present?
+- if current_user.present? && current_user.role != 'user'
   %ul.breadcrumb= make_breadcrumb
