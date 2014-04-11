@@ -4,9 +4,12 @@
 = render :partial => 'shared/form_errors', :locals => { :obj => @forward }
 
 .well
+  %h4 Meta
+  .pull-right
+    = link_to 'Edit', edit_domain_forward_path(@domain, @forward), :class => 'btn'
+    = link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_forward_path(@domain, @forward), :method => "delete", :class => 'btn btn-danger'
   %ul
     %li #{Forward.human_attribute_name(:created_at)}: #{l @forward.created_at}.
     %li #{Forward.human_attribute_name(:updated_at)}: #{l @forward.updated_at}.
 
-  .pull-right= link_to 'Edit', edit_domain_forward_path(@domain, @forward), :class => 'btn'
-  .pull-right= link_to t('.destroy', :default => t("helpers.links.destroy")), confirm_destroy_domain_forward_path(@domain, @forward), :method => "delete", :class => 'btn btn-danger'
+  .clearfix
