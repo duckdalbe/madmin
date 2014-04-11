@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
 
   after_destroy :delete_user_data
 
+  def self.find_all_by_initial(initial)
+    where("name like '#{initial}%'")
+  end
+
   def self.latest(limit=20)
     order(:created_at).limit(limit)
   end
