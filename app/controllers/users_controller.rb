@@ -1,8 +1,10 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   load_resource :domain, except: :myself
+  skip_load_and_authorize_resource only: :myself
 
   def myself
+    authorize! :show, current_user
     respond_to do |format|
       format.html { redirect_to [current_user.domain, current_user] }
       format.json { render json: current_user }
