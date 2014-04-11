@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Madmin::Application.routes.draw do
 
   match '/login/new' => 'logins#new', :as => :new_login

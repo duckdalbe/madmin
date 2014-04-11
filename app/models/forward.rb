@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Forward < ActiveRecord::Base
   belongs_to :domain
   attr_accessible :destination, :name, :domain_id

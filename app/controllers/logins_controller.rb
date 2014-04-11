@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class LoginsController < ApplicationController
   skip_before_filter :authenticate
   skip_load_and_authorize_resource

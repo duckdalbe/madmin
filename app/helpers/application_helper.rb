@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ApplicationHelper
   def make_breadcrumb
     url_for.split('/').map do |part|

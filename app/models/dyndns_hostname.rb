@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DyndnsHostname < ActiveRecord::Base
   belongs_to :user
   attr_accessible :name, :user_id

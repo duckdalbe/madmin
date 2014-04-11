@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class DyndnsHostnamesController < ApplicationController
   load_resource :domain
   load_resource :user
