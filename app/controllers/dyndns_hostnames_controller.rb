@@ -66,7 +66,7 @@ class DyndnsHostnamesController < ApplicationController
       format.html { 
         redirect_to domain_user_path(@domain, @user, anchor: 'dyndns_hostnames')
       }
-      format.json { render json: DyndnsHostnames.all }
+      format.json { render json: DyndnsHostname.all }
     end
 
   end

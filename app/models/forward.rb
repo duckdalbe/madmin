@@ -17,7 +17,7 @@ class Forward < ActiveRecord::Base
   end
 
   def as_json(options={})
-    {
+    @json ||= {
       :name => self.name,
       :id => self.id,
       :destination => self.destination

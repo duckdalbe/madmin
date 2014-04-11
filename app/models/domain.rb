@@ -31,7 +31,7 @@ class Domain < ActiveRecord::Base
   end
 
   def as_json(options={})
-    {
+    @json ||= {
       :name => self.name,
       :id => self.id,
       :users => self.users,

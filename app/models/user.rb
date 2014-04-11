@@ -82,13 +82,14 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options={})
-    {
+    @json ||= {
       :name => self.name,
       :id => self.id,
       :domain => {
         :id => self.domain.id,
         :name => self.domain.name
         },
+      :role => self.role,
       :forward_destination => self.forward_destination,
       dyndns_hostnames: self.dyndns_hostnames.map(&:name)
     }
