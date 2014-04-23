@@ -23,7 +23,7 @@ class Domain < ActiveRecord::Base
 
   def delete_domain_data
     logger.info "Deleting domain-data for #{self}:"
-    logger.info `#{Rails.root}/bin/delete-mail-data.sh '#{domain.name}'`.chomp
+    logger.info `#{Rails.root}/bin/delete-mail-data.sh '#{self}'`.chomp
   end
 
   def destroyable?
