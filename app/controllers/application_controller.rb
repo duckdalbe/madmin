@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   rescue_from CanCan::AccessDenied do |exception|
-    render403
+    render404
+  end
+
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    render404
   end
 
   rescue_from ActiveRecord::DeleteRestrictionError do |exc|
@@ -68,13 +72,13 @@ class ApplicationController < ActionController::Base
   def filter_params
   end
 
-  def render403
+  def render404
     respond_to do |format|
       format.html do
-        render 'errors/403', :status => :forbidden
+        render 'errors/404', :status => :not_found
       end
       format.json do
-        render :text => "Forbidden".to_json, :status => :forbidden
+        render :text => "Not found".to_json, :status => :not_found
       end
     end
   end
