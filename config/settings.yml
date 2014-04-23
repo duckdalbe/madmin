@@ -1,0 +1,15 @@
+# Don't change default, we depend on the existence of some keys!
+default: &default
+  dyndns_hostnames:
+    enable: true
+
+production:
+  <<: *default
+  #dyndns_hostnames:
+  #  disable: [example.org]
+
+development:
+  <<: *default
+
+test:
+  <<: *default
