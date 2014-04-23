@@ -21,16 +21,17 @@
 
   .clearfix
 
-.well#dyndns_hostnames
-  %h4 Dyndns Hostnames
-  .pull-right= link_to t('new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
+- if can? :manage, DyndnsHostname
+  .well#dyndns_hostnames
+    %h4 Dyndns Hostnames
+    .pull-right= link_to t('new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
 
-  %ul
-    - @user.dyndns_hostnames.each do |hostname|
-      %li
-        = hostname.name
-        = link_to t('.edit'), edit_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small'
-        = link_to t('.destroy'), confirm_destroy_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small btn-danger'
-  .clearfix
+    %ul
+      - @user.dyndns_hostnames.each do |hostname|
+        %li
+          = hostname.name
+          = link_to t('.edit'), edit_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small'
+          = link_to t('.destroy'), confirm_destroy_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small btn-danger'
+    .clearfix
 
 

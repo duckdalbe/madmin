@@ -69,6 +69,8 @@ GEM
       activesupport (= 3.2.17)
       bundler (~> 1.0)
       railties (= 3.2.17)
+    rails_config (0.3.4)
+      activesupport (>= 3.0)
     railties (3.2.17)
       actionpack (= 3.2.17)
       activesupport (= 3.2.17)
@@ -114,6 +116,7 @@ DEPENDENCIES
   haml-rails
   mysql2
   rails (~> 3.2)
+  rails_config
   ruby_parser
   sass
   sass-rails (~> 3.2.3)

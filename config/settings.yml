@@ -1,0 +1,3 @@
+dyndns_hostnames:
+  enable: true
+  #disable: [example.org]
