@@ -53,8 +53,31 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.password_digest.blank? && params[:user][:password].blank?
+      # Temporarily allow setting forward_destination and role for users
+      # without a password_digest, until we can disable/change the
+      # validations of has_secure_password (works only with rails 4.x)
+      if (fw_dest = params[:user][:forward_destination]).present?
+        if fw_dest.match(EMAIL_ADDR_REGEXP)
+          @user.update_attribute(:forward_destination, fw_dest)
+        else
+          @user.errors.add(:forward_destination, 'is invalid')
+        end
+      end
+
+      if (role = params[:user][:role]).present?
+        if ROLES.include?(role)
+          @user.update_attribute(:role, role)
+        else
+          @user.errors.add(:role, 'is invalid')
+        end
+      end
+    else
+      @user.update_attributes(params[:user])
+    end
+
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.errors.blank?
         format.html {
           redirect_to [@user.domain, @user],
               notice: 'User was successfully updated.'
