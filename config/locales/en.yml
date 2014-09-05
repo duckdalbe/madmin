@@ -22,6 +22,11 @@ en:
   edit_name: Editing %{name}
   new_user: New Account
   new_hostname: New Dyndns Hostname
+  account: Account
+  set_forward: Set forward destination
+  change_password: Change password
+  destination: Destination address
+  assign_role: Assign role
   time:
     formats:
       default: "%d %B %Y, %H:%M"

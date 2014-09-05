@@ -1,5 +1,9 @@
-- if current_user.present?
-  %ul.nav
-    %li= link_to current_user.email, [current_user.domain, current_user]
-    %li#logout= link_to(t('Logout'), destroy_login_path)
+%nav.navbar.navbar-default.navbar-static-top{role: :navigation}
+  .container
+    .navbar-header
+      .navbar-brand.brand-info madmin
+      - if current_user.present?
+        %ul.nav.navbar-nav
+          %li= link_to current_user.email, [current_user.domain, current_user]
+          %li#logout= link_to(t('Logout'), destroy_login_path)
 

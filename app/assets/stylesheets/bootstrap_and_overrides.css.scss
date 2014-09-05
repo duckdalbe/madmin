@@ -1,2 +1,10 @@
-@import "bootstrap";
-@import "bootstrap-responsive";
+$mycolor: #DCF3F7;
+$navbar-default-brand-color: darken($mycolor, 50%);
+//$link-color: #0066cc;
+$panel-default-border: $mycolor;
+$panel-default-heading-bg: $mycolor;
+$state-warning-text: #cc9900;
+$panel-bg: #fafafa;
+$well-bg: #fff;
+
+@import 'bootstrap';

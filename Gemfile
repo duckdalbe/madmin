@@ -24,9 +24,9 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'bootstrap-sass'
   # sass-rails is a requirement of bootstrap-sass, yet it's not pulled by default. :(
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'bootstrap-sass', '~> 3.1.0'
 end
 
 #gem 'jquery-rails'
@@ -50,4 +50,3 @@ gem 'sass'
 gem 'haml-rails'
 gem 'ruby_parser'
 gem 'cancan'
-gem 'simple_form'

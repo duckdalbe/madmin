@@ -1,4 +1,35 @@
-.page-header
-  %h1= t 'new_user'
 
-= render 'form'
+.col-sm-12.col-md-9.col-lg-6
+  .panel.panel-primary
+    .panel-heading= t 'new_user'
+    .panel-body
+      = form_for([@domain, @user], html: { class: 'form', role: :form}) do |f|
+        = render :partial => 'shared/form_errors', :locals => { :obj => @user }
+
+        .form-group
+          = f.label :name
+          .input-group
+            = f.text_field :name, class: 'form-control'
+            %span.input-group-addon @#{@domain.name}
+
+        .form-group
+          = f.label :password
+          = f.password_field :password, class: 'form-control'
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, class: 'form-control'
+
+        .form-group
+          = f.label :forward_destination
+          = f.text_field :forward_destination, class: 'form-control'
+
+        - if (current_user.superadmin? && ! @user.postmaster?)
+          .form-group
+            -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
+            -# TODO: use cancan's roles for rights-checking.
+            = f.label :role
+            = f.collection_select :role, ROLES, :to_s, :humanize, {}, class: 'form-control'
+
+        .form-group
+          = f.submit t(:save), class: 'btn btn-primary'
+          = link_to t(:cancel), [@domain, @user], class: 'btn btn-link'
+

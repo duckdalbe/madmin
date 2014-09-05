@@ -1,36 +1,60 @@
 .page-header
   %h1= @user.email
 
-.well
-  %h4 Meta
-  .pull-right
-    = link_to 'Edit', edit_domain_user_path(@domain, @user), :class => 'btn'
-    - if @user.destroyable?
-      = link_to t('destroy'), confirm_destroy_domain_user_path(@domain, @user), :class => 'btn btn-danger'
-  %ul
-    %li #{User.human_attribute_name(:created_at)}: #{l @user.created_at}.
-    %li #{User.human_attribute_name(:updated_at)}: #{l @user.updated_at}.
-    %li
-      #{t(:role)}:
-      - if @user.postmaster?
-        = @user.superadmin? ? 'Superadmin' : 'Admin'
-      - else
-        = (@user.role.presence || User::ROLES.first).humanize
-    - if @user.forward_destination.present?
-      %li.text-info Email is <strong>not</strong> stored but forwarded to #{@user.forward_destination}.
+.col-sm-12.col-md-8.col-lg-6
+  .panel.panel-default
+    .panel-heading
+      = t(:account)
+      %ul.pull-right.list-inline
+        %li= link_to t(:edit), edit_domain_user_path(@domain, @user) 
+        - if @user.destroyable?
+          %li= link_to t('destroy'), confirm_destroy_domain_user_path(@domain, @user), class: 'text-danger'
 
-  .clearfix
+    .panel-body
+      %dl.dl-horizontal
 
-.well#dyndns_hostnames
-  %h4 Dyndns Hostnames
-  .pull-right= link_to t('new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
+        %dt= t :password
+        %dd
+          - if @user.password_digest.present?
+            .text-success good
+          - else
+            .text-warning old
 
-  %ul
-    - @user.dyndns_hostnames.each do |hostname|
-      %li
-        = hostname.name
-        = link_to t('.edit'), edit_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small'
-        = link_to t('.destroy'), confirm_destroy_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small btn-danger'
-  .clearfix
+        %dt= t :forward
+        %dd
+          - if @user.forward_destination.present?
+            = @user.forward_destination
+            %small.text-warning (Email is <strong>not stored</strong>.)
+          - else
+            .text-info Email is not forwarded.
+
+        %dt= t(:role)
+        %dd
+          - if @user.postmaster?
+            = @user.superadmin? ? 'Superadmin' : 'Admin'
+          - else
+            = (@user.role.presence || User::ROLES.first).humanize
+
+        %br
+        %small.text-muted
+          %dt= User.human_attribute_name(:created_at)
+          %dd= l @user.created_at
+          %dt= User.human_attribute_name(:updated_at)
+          %dd= l @user.updated_at
+
+
+.col-sm-12.col-md-6.col-lg-6
+  .panel.panel-default#dyndns_hostnames
+    .panel-heading Dyndns Hostnames
+    .panel-body
+      .pull-right= link_to t('new'), new_domain_user_dyndns_hostname_path(@domain, @user), :class => 'btn btn-primary'
+
+      %ul
+        - @user.dyndns_hostnames.each do |hostname|
+          %li
+            = hostname.name
+            = link_to t('.edit'), edit_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small'
+            = link_to t('.destroy'), confirm_destroy_domain_user_dyndns_hostname_path(@domain, @user, hostname), :class => 'btn btn-small btn-danger'
+      .clearfix
 
 

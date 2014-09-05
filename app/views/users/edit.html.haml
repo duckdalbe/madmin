@@ -1,4 +1,38 @@
 .page-header
-  %h1= t('edit_name', name: @user.name)
+  %h1= t('edit_name', name: @user.email)
 
-= render 'form'
+= form_for([@domain, @user]) do |f|
+  = render :partial => 'shared/form_errors', :locals => { :obj => @user }
+
+  .col-sm-12.col-md-9.col-lg-6
+    .panel.panel-default
+      .panel-heading= t(:change_password)
+      .panel-body
+        .form-group
+          = f.password_field :password, class: 'form-control', placeholder: 'Password'
+        .form-group
+          = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Password confirmation'
+        = f.submit t(:save), class: 'btn btn-primary'
+
+  .col-sm-12.col-md-9.col-lg-6
+    .panel.panel-default
+      .panel-heading= t :set_forward
+      .panel-body
+        .form-group
+          = f.text_field :forward_destination, class: 'form-control', placeholder: t(:destination)
+        = f.submit t(:save), class: 'btn btn-primary'
+
+  - if (current_user.superadmin? && ! @user.postmaster?)
+    .col-sm-12.col-md-9.col-lg-6
+      .panel.panel-default
+        .panel-heading= t(:assign_role)
+        .panel-body
+          -# TODO: let admins uplevel others to admin — but don't let them uplevel anyone to superadmin.
+          -# TODO: use cancan's roles for rights-checking.
+          .form-group
+            = f.collection_select :role, ROLES, :to_s, :humanize, {}, class: 'form-control'
+          = f.submit t(:save), class: 'btn btn-primary'
+
+
+.col-sm-12
+  = link_to t(:cancel), [@domain, @user], class: 'btn btn-default'

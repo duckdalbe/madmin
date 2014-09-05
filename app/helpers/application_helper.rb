@@ -2,7 +2,7 @@
 module ApplicationHelper
   def make_breadcrumb
     url_for.split('/').map do |part|
-      # Skip IDs, we use the instance variable to to easier on the database.
+      # Skip IDs, we use the instance variable to go easier on the database.
       next if part.to_i > 0 || part.blank?
 
       obj = instance_variable_get("@#{part.singularize}")
@@ -26,7 +26,6 @@ module ApplicationHelper
   end
 
   def bc_part(name, url)
-    @divider ||= ' » '
-    @divider + link_to_unless(current_page?(url), name, url)
+    content_tag(:li, link_to_unless(current_page?(url), name, url))
   end
 end

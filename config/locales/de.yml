@@ -22,6 +22,7 @@ de:
   edit_name: Bearbeite %{name}
   new_user: Neues Konto
   new_hostname: Neuer Dyndns-Hostname
+  account: Konto
   time:
     formats:
       default: "%d.%m.%Y, %H:%M Uhr"
