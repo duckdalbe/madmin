@@ -103,6 +103,7 @@ class User < ActiveRecord::Base
     [self.name, self.domain.name].join '@'
   end
 
+  # TODO: authenticate against madmin_gauth if present in $PATH
   def authenticate(input)
     if password_digest.blank?
       logger.info "BCrypt-attribute is blank, attempting authentication against legacy password"
